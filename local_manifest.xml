@@ -6,16 +6,6 @@
                 fetch="https://github.com/ikwfahmi" />
         <remote name="Kyura"
                 fetch="https://github.com/Kyura-Playground" />
-        <remote name="Project"
-                 fetch="https://github.com" />
-
-        <!-- Remove default CAF projects -->
-         <remove-project name="platform/hardware/qcom/audio" />
-         <remove-project name="platform/hardware/qcom/display" />
-         <remove-project name="platform/hardware/qcom/media" />
-         <remove-project name="platform/hardware/qcom-caf/msm8998/audio" />
-         <remove-project name="platform/hardware/qcom-caf/msm8998/display" />
-         <remove-project name="platform/hardware/qcom-caf/msm8998/media" />
 
         <!-- Sync trees -->
         <project path="device/asus/X00T" name="device_asus_X00T" remote="Kyura" revision="Spark" clone-depth="1" />
