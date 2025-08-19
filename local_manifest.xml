@@ -9,8 +9,6 @@
         <!-- Sync trees -->
         <project path="device/asus/X00T" name="device_asus_X00T" remote="Kyura" revision="Spark" clone-depth="1" />
         <project path="vendor/asus" name="vendor_asus" remote="Kyura" revision="13-hmp" clone-depth="1" />
-        <project path="kernel/asus/sdm660" name="kernel_asus_sdm636" remote="Kyura" revision="hmp" clone-depth="1" clone-submodules="true" />
-
         <!-- Private keys -->
         <project path="vendor/lineage-priv/keys" name="public-keys" remote="Kyura" revision="main" clone-depth="1" />
 
