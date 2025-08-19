@@ -6,16 +6,10 @@
                 fetch="https://github.com/ikwfahmi" />
         <remote name="Kyura"
                 fetch="https://github.com/Kyura-Playground" />
-
-        <remove-project name="hardware/qcom-caf/msm8998/audio" />
-
         <!-- Sync trees -->
         <project path="device/asus/X00T" name="device_asus_X00T" remote="Kyura" revision="Spark" clone-depth="1" />
         <project path="vendor/asus" name="vendor_asus" remote="Kyura" revision="13-hmp" clone-depth="1" />
         <project path="kernel/asus/sdm660" name="kernel_asus_sdm636" remote="Kyura" revision="hmp" clone-depth="1" clone-submodules="true" />
-        <project path="hardware/qcom-caf/msm8998/audio" name="hardware_qcom-caf_msm8998_audio" remote="Kyura" revision="tea-caf-msm8998" clone-depth="1" />
-        <project path="hardware/qcom-caf/msm8998/display" name="hardware_qcom-caf_msm8998_display" remote="Kyura" revision="tea-caf-msm8998" clone-depth="1" />
-        <project path="hardware/qcom-caf/msm8998/media" name="hardware_qcom-caf_msm8998_media" remote="Kyura" revision="tea-caf-msm8998" clone-depth="1" />
 
         <!-- Private keys -->
         <project path="vendor/lineage-priv/keys" name="public-keys" remote="Kyura" revision="main" clone-depth="1" />
