@@ -7,6 +7,8 @@
         <remote name="Kyura"
                 fetch="https://github.com/Kyura-Playground" />
 
+        <remove-project name="hardware/qcom-caf/msm8998/audio" />
+
         <!-- Sync trees -->
         <project path="device/asus/X00T" name="device_asus_X00T" remote="Kyura" revision="Spark" clone-depth="1" />
         <project path="vendor/asus" name="vendor_asus" remote="Kyura" revision="13-hmp" clone-depth="1" />
