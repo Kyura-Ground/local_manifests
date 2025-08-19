@@ -8,8 +8,5 @@
                 fetch="https://github.com/Kyura-Playground" />
         <!-- Sync trees -->
         <project path="device/asus/X00T" name="device_asus_X00T" remote="Kyura" revision="Spark" clone-depth="1" />
-        <project path="vendor/asus" name="vendor_asus" remote="Kyura" revision="13-hmp" clone-depth="1" />
-        <!-- Private keys -->
-        <project path="vendor/lineage-priv/keys" name="public-keys" remote="Kyura" revision="main" clone-depth="1" />
 
 </manifest>
