@@ -8,6 +8,6 @@
                 fetch="https://github.com/Kyura-Playground" />
 
         <!-- Sync trees -->
-        <project path="device/asus/X00TD" name="android_device_asus_X00TD-4.19" remote="Kyura" revision="Evox14" clone-depth="1" />
+        <project path="device/asus/X00TD" name="android_device_asus_X00TD-4.19" remote="Kyura" revision="Axion" clone-depth="1" />
 
 </manifest>
