@@ -7,6 +7,6 @@
         <remote name="Kyura"
                 fetch="https://github.com/Kyura-Playground" />
         <!-- Sync trees -->
-        <project path="device/asus/X00T" name="device_asus_X00T" remote="Kyura" revision="Supex" />
+        <project path="device/asus/X00T" name="device_asus_X00T" remote="Kyura" revision="Crdroid" />
 
 </manifest>
