@@ -9,6 +9,8 @@
         <remote name="ikwfahmi"
         fetch="https://github.com/ikwfahmi" />
 
+        <remove-project name="android_device_qcom_sepolicy" />
+
         <!-- Sync trees -->
         <project path="device/asus/X00TD" name="android_device_asus_X00TD-4.19" revision="Infi" remote="Kyura" clone-depth="1" />
         <project path="device/asus/sdm660-common" name="android_device_asus_sdm660-common-4.19" revision="bka-infi" remote="Kyura" clone-depth="1" />
