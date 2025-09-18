@@ -5,9 +5,9 @@
         <remote name="ikwfahmi"
                 fetch="https://github.com/ikwfahmi" />
         <remote name="Kyura"
-                fetch="https://github.com/Kyura-Playground" />
+                fetch="https://github.com/Kyura-Ground" />
 
         <!-- Sync trees -->
-        <project path="device/asus/X00TD" name="device_asus_X00TD-4.4" remote="Kyura" revision="lineage-18.1" clone-depth="1" />
+        <project path="device/asus/X00TD" name="device_asus_X00TD-4.4" remote="Kyura" revision="Havoc" clone-depth="1" />
 
 </manifest>
