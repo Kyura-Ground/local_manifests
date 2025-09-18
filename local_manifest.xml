@@ -1,13 +1,22 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 
 <manifest>
-        
-        <remote name="ikwfahmi"
-                fetch="https://github.com/ikwfahmi" />
+
         <remote name="Kyura"
-                fetch="https://github.com/Kyura-Playground" />
+        fetch="https://github.com/Kyura-Ground" />
+        <remote name="rsu" 
+        fetch="https://github.com/rsuplaygrnd" />
+        <remote name="ikwfahmi"
+        fetch="https://github.com/ikwfahmi" />
 
         <!-- Sync trees -->
-        <project path="device/asus/X00TD" name="android_device_asus_X00TD-4.19" remote="Kyura" revision="Lunaris" clone-depth="1" />
+        <project path="device/asus/X00TD" name="android_device_asus_X00TD-4.19" revision="Lunaris" remote="Kyura" clone-depth="1" />
+        <project path="device/asus/sdm660-common" name="android_device_asus_sdm660-common-4.19" revision="bka-lunaris" remote="Kyura" clone-depth="1" />
+        <project path="vendor/asus" name="proprietary_vendor_asus-4.19" revision="15.0" remote="Kyura" clone-depth="1" />
+        <project path="kernel/asus/sdm660" name="android_kernel_asus_sdm660" revision="KernelSU" remote="Kyura" clone-depth="1" clone-submodules="true" />
+
+        <!-- Private keys -->
+        <project path="vendor/lineage-priv/keys" name="public-keys" remote="Kyura" revision="main" clone-depth="1" />
 
 </manifest>
