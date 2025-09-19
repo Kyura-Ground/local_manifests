@@ -5,7 +5,7 @@
         <remote name="ikwfahmi"
                 fetch="https://github.com/ikwfahmi" />
         <remote name="Kyura"
-                fetch="https://github.com/Kyura-Playground" />
+                fetch="https://github.com/Kyura-Ground" />
         <!-- Sync trees -->
         <project path="device/asus/X00T" name="device_asus_X00T" remote="Kyura" revision="Crdroid" />
 
