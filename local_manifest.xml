@@ -5,7 +5,7 @@
         <remote name="ikwfahmi"
                 fetch="https://github.com/ikwfahmi" />
         <remote name="Kyura"
-                fetch="https://github.com/Kyura-Playground" />
+                fetch="https://github.com/Kyura-Ground" />
 
         <!-- Sync trees -->
         <project path="device/asus/X00TD" name="android_device_asus_X00TD-4.19" remote="Kyura" revision="Clover" clone-depth="1" />
