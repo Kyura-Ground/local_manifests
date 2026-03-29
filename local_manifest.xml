@@ -13,6 +13,6 @@
         <project path="device/asus/X00TD" name="android_device_asus_X00TD-4.19" revision="Infinity-16" remote="Kyura" clone-depth="1" />
         <project path="device/asus/sdm660-common" name="android_device_asus_sdm660-common-4.19" revision="lineage-23.2" remote="Kyura" clone-depth="1" />
         <project path="vendor/asus" name="proprietary_vendor_asus-4.19" revision="lineage-23.2" remote="SonicBSV" clone-depth="1" />
-        <project path="kernel/asus/sdm660" name="android_kernel_asus_sdm660-4.19" revision="lineage-23.2" remote="SonicBSV" clone-depth="1" clone-submodules="true" />
+        <project path="kernel/asus/sdm660" name="android_kernel_asus_sdm660-4.19" revision="rsu-ori" remote="Kyura" clone-depth="1" clone-submodules="true" />
 
 </manifest>
