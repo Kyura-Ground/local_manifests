@@ -6,17 +6,11 @@
         fetch="https://github.com/Kyura-Ground" />
         <remote name="ikwfahmi"
         fetch="https://github.com/ikwfahmi" />
-        <remote name="gitlab"
-        fetch="https://gitlab.com/NoPrincessHere" />
-        <remote name="PixelOS-Devices"
-        fetch="https://github.com/PixelOS-Devices" />
-        
 
         <!-- Sync trees -->
-        <project path="device/asus/X00TD" name="android_device_asus_X00TD" revision="Infinity-16" remote="Kyura" clone-depth="1" />
-        <project path="device/asus/sdm660-common" name="android_device_asus_sdm660-common" revision="Infinity-16" remote="Kyura" clone-depth="1" />
-        <project path="vendor/asus/X00TD" name="proprietary_vendor_asus_X00TD" revision="sixteen-qpr2" remote="gitlab" clone-depth="1" />
-        <project path="vendor/asus/sdm660-common" name="proprietary_vendor_asus_sdm660-common" revision="sixteen-qpr2" remote="gitlab" clone-depth="1" />
-        <project path="kernel/asus/sdm660" name="android_kernel_asus_sdm660" revision="sixteen-qpr2" remote="PixelOS-Devices" clone-depth="1" clone-submodules="true" />
+        <project path="device/asus/X00TD" name="android_device_asus_X00TD-4.19" revision="Infinity-16" remote="Kyura" clone-depth="1" />
+        <project path="device/asus/sdm660-common" name="android_device_asus_sdm660-common-4.19" revision="Infinity-16" remote="Kyura" clone-depth="1" />
+        <project path="vendor/asus" name="proprietary_vendor_asus-4.19" revision="lineage-23.2" remote="Kyura" clone-depth="1" />
+        <project path="kernel/asus/sdm660" name="android_kernel_asus_sdm660-4.19" revision="lineage-23.2" remote="Kyura" clone-depth="1" clone-submodules="true" />
 
 </manifest>
