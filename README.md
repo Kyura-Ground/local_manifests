@@ -2,7 +2,7 @@
 To initialize your device trees setup, use command:
 
 ```bash
-git clone -b main https://github.com/ikwfahmi/local_manifests.git .repo/local_manifests
+git clone -b main https://github.com/Kyura-Ground/local_manifests.git .repo/local_manifests --depth=1
 ```
 
 Then sync with ROM source or sync standalone with this command:
