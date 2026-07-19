@@ -15,6 +15,6 @@
         <project path="kernel/asus/sdm660" name="android_kernel_asus_sdm660-4.19" revision="lineage-20" remote="Kyura" clone-depth="1" clone-submodules="true" />
 
          <!-- keys sign -->
-        <project path="vendor/lineage-priv/keys" name="public-keys" revision="lineage-20" remote="Kyura" clone-depth="1" />
+        <project path="vendor/lineage-priv/keys" name="public-keys" revision="main" remote="Kyura" clone-depth="1" />
 
 </manifest>
