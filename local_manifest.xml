@@ -6,15 +6,16 @@
         fetch="https://github.com/Kyura-Ground" />
         <remote name="ikwfahmi"
         fetch="https://github.com/ikwfahmi" />
+        <remote name="asleno"
+        fetch="https://github.com/aslenofarid" />
 
         <!-- Sync trees -->
-        <project path="device/asus/X00TD" name="android_device_asus_X00TD-4.4" revision="lineage-20" remote="Kyura" clone-depth="1" />
-        <project path="device/asus/sdm660-common" name="android_device_asus_sdm660-common-4.4" revision="lineage-20" remote="Kyura" clone-depth="1" />
-        <project path="vendor/asus/X00TD" name="proprietary_vendor_asus_X00TD-4.4" revision="lineage-20" remote="Kyura" clone-depth="1" />
-        <project path="vendor/asus/sdm660-common" name="proprietary_vendor_asus_sdm660-common-4.4" revision="lineage-20" remote="Kyura" clone-depth="1" />
-        <project path="kernel/asus/sdm660" name="android_kernel_asus_sdm660-4.4" revision="lineage-20" remote="Kyura" clone-depth="1" clone-submodules="true" />
+        <project path="device/asus/X00TD" name="device_asus_X00TD" revision="lineage-18.1" remote="asleno" clone-depth="1" />
+        <project path="device/asus/sdm660-common" name="device_asus_sdm660-common" revision="lineage-18.1" remote="asleno" clone-depth="1" />
+        <project path="vendor/asus" name="proprietary_vendor_asus" revision="lineage-18.1" remote="asleno" clone-depth="1" />
+        <project path="kernel/asus/sdm660" name="kernel_asus_sdm660" revision="lineage-17.1" remote="asleno" clone-depth="1" clone-submodules="true" />
 
-         <!-- keys sign -->
+         <!-- keys sign
         <project path="vendor/lineage-priv/keys" name="public-keys" revision="main" remote="Kyura" clone-depth="1" />
-
+         -->
 </manifest>
