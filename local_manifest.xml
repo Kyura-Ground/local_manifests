@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <manifest>
+    <remote name="Kyura" fetch="https://github.com/Kyura-Ground" />
+    <remote name="ikwfahmi" fetch="https://github.com/ikwfahmi" />
 
-        <remote name="Kyura"
-        fetch="https://github.com/Kyura-Ground" />
-        <remote name="ikwfahmi"
-        fetch="https://github.com/ikwfahmi" />
+    <remove-project path="device/asus/X00TD" optional="true" />
+    <remove-project path="device/asus/sdm660-common" optional="true" />
+    <remove-project path="vendor/asus" optional="true" />
+    <remove-project path="kernel/asus/sdm660" optional="true" />
+    <remove-project path="hardware/qcom-caf/sdm660/audio" optional="true" />
+    <remove-project path="vendor/qcom/opensource/display" optional="true" />
 
-        <!-- Sync trees -->
-        <project path="device/asus/X00TD" name="android_device_asus_X00TD-4.19" revision="Evox" remote="Kyura" clone-depth="1" />
+    <project path="device/asus/X00TD" name="android_device_asus_X00TD-4.19" remote="Kyura" revision="Evox" clone-depth="1" />
+    <project path="device/asus/sdm660-common" name="android_device_asus_sdm660-common-4.19" remote="Kyura" revision="Evox" clone-depth="1" />
+    <project path="vendor/asus" name="proprietary_vendor_asus-4.19" remote="Kyura" revision="Evox" clone-depth="1" />
+    <project path="kernel/asus/sdm660" name="android_kernel_asus_sdm660-4.19" remote="Kyura" revision="lineage-24.0" clone-depth="1" />
+    <project path="hardware/qcom-caf/sdm660/audio" name="android_hardware_qcom_audio" remote="Kyura" revision="lineage-24.0-caf-sdm660" clone-depth="1" />
+    <project path="vendor/qcom/opensource/display" name="android_vendor_qcom_opensource_display" remote="Kyura" revision="lineage-24.0" clone-depth="1" />
 </manifest>
