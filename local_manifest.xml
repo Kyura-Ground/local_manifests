@@ -12,6 +12,7 @@
     <remove-project path="hardware/qcom-caf/sdm660/audio" optional="true" />
     <remove-project path="vendor/qcom/opensource/display" optional="true" />
 
+    <remove-project path="hardware/lineage/compat" optional="true" />
     <remove-project path="hardware/lineage/interfaces" optional="true" />
     <remove-project path="device/lineage/sepolicy" optional="true" />
 
@@ -21,6 +22,7 @@
     <project path="kernel/asus/sdm660" name="android_kernel_asus_sdm660-4.19" remote="Kyura" revision="lineage-24.0" clone-depth="1" />
     <project path="hardware/qcom-caf/sdm660/audio" name="android_hardware_qcom_audio" remote="Kyura" revision="lineage-24.0-caf-sdm660" clone-depth="1" />
     <project path="vendor/qcom/opensource/display" name="android_vendor_qcom_opensource_display" remote="Kyura" revision="lineage-24.0" clone-depth="1" />
+    <project path="hardware/lineage/compat" name="android_hardware_lineage_compat" remote="Lineage" revision="lineage-24.0" clone-depth="1" />
     <project path="hardware/lineage/interfaces" name="android_hardware_lineage_interfaces" remote="Lineage" revision="lineage-24.0" clone-depth="1" />
     <project path="device/lineage/sepolicy" name="android_device_lineage_sepolicy" remote="Lineage" revision="lineage-24.0" clone-depth="1" />
 </manifest>
