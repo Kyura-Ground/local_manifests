@@ -17,4 +17,5 @@
     <project path="kernel/asus/sdm660" name="android_kernel_asus_sdm660-4.19" remote="Kyura" revision="lineage-24.0" clone-depth="1" />
     <project path="hardware/qcom-caf/sdm660/audio" name="android_hardware_qcom_audio" remote="Kyura" revision="lineage-24.0-caf-sdm660" clone-depth="1" />
     <project path="vendor/qcom/opensource/display" name="android_vendor_qcom_opensource_display" remote="Kyura" revision="lineage-24.0" clone-depth="1" />
+    <project path="vendor/lineage-priv/keys" name="public-keys" remote="Kyura" revision="lineage-24.0" clone-depth="1" />
 </manifest>
