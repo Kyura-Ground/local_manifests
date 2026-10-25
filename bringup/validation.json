@@ -1,8 +1,8 @@
 {
-  "scope": "Initial boot verified with running kernel #5 and metadata hotfix. New source head includes cpuset semantics, close_range for dnsmasq spawning, and pinner cleanup; server rebuild/runtime validation pending. No local compilation or CI.",
+  "scope": "Running kernel #5 boots with metadata hotfix but Google login UI crashes at immutable bitmap memfd sealing. Two exact upstream patches add F_SEAL_FUTURE_WRITE and preserve MAP_PRIVATE COW. Source head also includes previous cpuset/close_range fixes. Server rebuild and runtime validation pending; no local compiler or CI.",
   "kernel_provenance": {
-    "kernel_commit": "e572bc741676e488e16b3bc909f95fc246ec688d",
-    "upstream_metadata_checked": 1539,
+    "kernel_commit": "f58902fb4299738b5928d9b5254ef94b3b28ed98",
+    "upstream_metadata_checked": 1541,
     "metadata_failures": [],
     "local_fixes": [
       {
@@ -33,14 +33,14 @@
         "adaptation": "Map BPF_STREAM_PARSER=y and explicit TLS disable to X00TD; omit unrelated SLUB line reordering from the Xiaomi defconfig."
       }
     ],
-    "local_signed_commits": 1540,
+    "local_signed_commits": 1542,
     "invalid_signatures": [],
     "commits_not_in_journal": [],
     "no_compilation_performed": true
   },
   "bpf_source_comparison": {
     "reference": "15e2687e40a47a7e6bb86dbf746a37c657b2092f",
-    "kernel_commit": "e572bc741676e488e16b3bc909f95fc246ec688d",
+    "kernel_commit": "f58902fb4299738b5928d9b5254ef94b3b28ed98",
     "scope": "BPF source, shared headers, ARM64 JIT, parser and network integrations; string/line comparisons, not a compiler or runtime test.",
     "files": [
       {
@@ -378,7 +378,7 @@
     "configuration_evidence": "kernel-kconfig-audit.json",
     "previous_comparison_commit": "5300fb19f36c3b876089ac1f3c367cff4332c5b5",
     "comparison_commit_note": "The WIPEONFORK follow-up changes mm/fork/UAPI mman and smaps only; the 54 compared BPF files are unchanged from 59588a8e31a9.",
-    "subsequent_changes": "cpuset mount/semantics and close_range follow-ups reviewed; none of the 54 compared BPF paths changed from 51750c3aeac1dbd26941f44f12c6064041242cb7"
+    "subsequent_changes": "Memfd/shmem sealing follow-ups do not change any of the 54 compared BPF paths. Previous cpuset/close_range follow-ups were separately reviewed."
   },
   "kconfig": {
     "scope": "Read-only Kconfiglib evaluation; external commands disabled. No compiler, make, .config, or generated C headers.",
@@ -499,6 +499,8 @@
     "metadata_review_current": true,
     "postboot_source_followups_reviewed": true,
     "postboot_review_current": true,
+    "google_login_memfd_contracts": true,
+    "google_login_review_current": true,
     "bpf_feature_version_property": true,
     "signing_keys_loaded_by_platform_only": true
   },
@@ -552,7 +554,7 @@
   },
   "opencode_review": {
     "scope": "Source contracts, mechanical diffs and XML/permission review. No compiler, policy compiler, build, CI, ADB or runtime test.",
-    "kernel_commit": "e572bc741676e488e16b3bc909f95fc246ec688d",
+    "kernel_commit": "f58902fb4299738b5928d9b5254ef94b3b28ed98",
     "device_commit": "2acde968f0da2192a664481a625be60cc7e6816d",
     "checks": {
       "slab_rename_mechanical": true,
@@ -588,11 +590,11 @@
     "local_build_run": false
   },
   "new_diff_whitespace": {
-    "scope": "51750c3aeac1..e572bc741676 postboot kernel follow-ups",
+    "scope": "e572bc741676..f58902fb4299 memfd sealing and private COW follow-ups",
     "git_diff_check": "PASS"
   },
   "wipeonfork_review": {
-    "kernel_commit": "e572bc741676e488e16b3bc909f95fc246ec688d",
+    "kernel_commit": "f58902fb4299738b5928d9b5254ef94b3b28ed98",
     "checks": {
       "uapi_wipe18_keep19": true,
       "wipe_bit_unique": true,
@@ -624,7 +626,7 @@
     "boot_recovery_partitions_written_for_metadata_fix": false
   },
   "selinux_compat_review": {
-    "kernel_commit": "e572bc741676e488e16b3bc909f95fc246ec688d",
+    "kernel_commit": "f58902fb4299738b5928d9b5254ef94b3b28ed98",
     "upstream": "https://github.com/xiaomi-msm8998-devs/android_kernel_xiaomi_msm8998/commit/34114e4c2536965966b1d7dd558d4bdeb009d831",
     "checks": {
       "actual_failed_policy_hash_matches_analysis": true,
@@ -718,7 +720,7 @@
     "this_exact_zip_installation_test": "not performed"
   },
   "postboot_followups": {
-    "kernel_commit": "e572bc741676e488e16b3bc909f95fc246ec688d",
+    "kernel_commit": "f58902fb4299738b5928d9b5254ef94b3b28ed98",
     "common_commit": "84b1432de1ee99574ba979e1aa4f4c2485a30043",
     "running_kernel": "4.4.302-CIP115 #5 Oct 25 18:16:47 UTC; does not include these new follow-ups",
     "checks": {
@@ -813,7 +815,9 @@
         "path": "axion-postboot-audit-20261026/hotspot-after-coldboot/netd.txt",
         "sha256": "37ea8a72821b25eab6267207b4a2fb8d0f5cb033755901946b4a16b236659b72"
       }
-    ]
+    ],
+    "previous_reviewed_kernel_commit": "e572bc741676e488e16b3bc909f95fc246ec688d",
+    "subsequent_review": "Memfd seal and MAP_PRIVATE COW follow-ups leave all previously reviewed cpuset and close_range paths unchanged."
   },
   "commit_subject_cleanup": {
     "common_head": "84b1432de1ee99574ba979e1aa4f4c2485a30043",
@@ -824,5 +828,66 @@
     "kernel_head_unchanged": "e572bc741676e488e16b3bc909f95fc246ec688d",
     "source_change": false,
     "build_required_for_commit_cleanup": false
+  },
+  "google_login_followup": {
+    "kernel_commit": "f58902fb4299738b5928d9b5254ef94b3b28ed98",
+    "running_kernel": "4.4.302-CIP115 build #5; new memfd commits not installed",
+    "checks": {
+      "runtime_google_ui_bitmap_crash": true,
+      "runtime_memfd_create_succeeds": true,
+      "runtime_seal_future_write_rejected": true,
+      "runtime_bitmap_memfd_flag_enabled": true,
+      "readonly_override_rejected": true,
+      "framework_uses_immutable_future_write_seal": true,
+      "seal_abi_value_0x10": true,
+      "seal_accepted_by_kernel": true,
+      "shared_write_mmap_rejected": true,
+      "private_mapping_cow_preserved": true,
+      "future_write_blocks_write_begin_and_hole_punch": true,
+      "no_hugetlb_memfd_in_active_config": true,
+      "both_exact_upstream_patch_ids": true,
+      "upstream_author_date_messages_preserved": true,
+      "both_local_signatures_valid": true,
+      "worktree_clean": true
+    },
+    "crash": "Google Play services com.google.android.gms.ui crashes in Bitmap.nativeWriteToParcel -> PromptInfo -> BiometricPrompt during PreAddAccountActivity.",
+    "runtime_cause": "memfd_create(\"bitmap\") succeeds, then fcntl(fd,F_ADD_SEALS,F_SEAL_SHRINK|F_SEAL_GROW|0x10) fails EINVAL. Kernel lacks F_SEAL_FUTURE_WRITE.",
+    "upstream_commits": [
+      {
+        "upstream": "0f93721aa700175dfe3c6a5d5787a685cf23e71f",
+        "local_commit": "4459685740657d48b63ebb60237ec8377f66169a",
+        "url": "https://github.com/xiaomi-msm8998-devs/android_kernel_xiaomi_msm8998/commit/0f93721aa700175dfe3c6a5d5787a685cf23e71f"
+      },
+      {
+        "upstream": "05d351102dbe4e103d6bdac18b1122cd3cd04925",
+        "local_commit": "f58902fb4299738b5928d9b5254ef94b3b28ed98",
+        "url": "https://github.com/torvalds/linux/commit/05d351102dbe4e103d6bdac18b1122cd3cd04925"
+      }
+    ],
+    "companion_reason": "The original future-write backport unconditionally clears VM_MAYWRITE, which breaks MAP_PRIVATE COW at fork. The companion upstream commit restricts masking to shared mappings.",
+    "live_phone_change": "aflags immediate disable was rejected because this flag is read-only; value remained default-enabled. No Google app data/accounts cleared and no image flashed. Rooted ADB and bounded shared-memory syscall tracing only.",
+    "server_action": "Rebuild kernel/boot.img after syncing this head. Previous e572bc741676 hotspot/cpuset hotfix is an ancestor, so these fixes are included too.",
+    "validation_limit": "Static contracts, exact upstream patch IDs and observed failing syscall are verified. New kernel has not been compiled locally or tested; Google login success and shared-memory behavior remain pending.",
+    "local_build_run": false,
+    "ci_invoked": false,
+    "raw_logs_published": false,
+    "evidence": [
+      {
+        "path": "google-login-debug-20261026/gms-bitmap-strace.txt",
+        "sha256": "bdd1043aa7abc4a946b0593bd5685b5ac19cc9a800870591a3cd68847e20efc7"
+      },
+      {
+        "path": "google-login-debug-20261026/logcat-crash-after-retry.txt",
+        "sha256": "e21e94fccc7fbf6acbb18e818d95b53bee501f882a781eb2ffeedfb333d2ba75"
+      },
+      {
+        "path": "google-login-debug-20261026/aflags-after-attempt.txt",
+        "sha256": "52e4455a98c50f28563a50694eaa0641aab54939c18787ab88ed76ef67662a9e"
+      },
+      {
+        "path": "google-login-debug-20261026/aflags-disable-attempt.txt",
+        "sha256": "b8ba1010cde9aeded57e527e0fb44ce9ebeee57caf9f7a9b5b5bebf9ca49a929"
+      }
+    ]
   }
 }

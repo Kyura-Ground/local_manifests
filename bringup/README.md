@@ -17,8 +17,8 @@ It is a source snapshot, not a revision-locked manifest of the complete platform
 The device metadata is for the user's confirmed 4 GB / 13+5 MP rear / 8 MP front
 X00TD variant. The SoC is Snapdragon 636 despite the shared sdm660 platform name.
 
-`kernel-cherry-picks.jsonl` records 1,539 upstream-derived commits and one local
-correction (1,540 signed new kernel commits). Upstream author, author date and
+`kernel-cherry-picks.jsonl` records 1,541 upstream-derived commits and one local
+correction (1,542 signed new kernel commits). Upstream author, author date and
 message bodies were verified. Prefix/path adaptations and partial picks are
 explicitly recorded. Empty/already implemented changes are journaled separately.
 The ASUS CIP115 base, existing blobs and signing identity remain unchanged.
@@ -117,3 +117,11 @@ scope and consistent wording. Raw message bodies, author identities/dates,
 Change-Id and Signed-off-by trailers are unchanged. No source code changed.
 See [commit-subject-cleanup.md](commit-subject-cleanup.md) and its old/new hash
 mapping. All 1,540 kernel commits remain unchanged.
+
+## Google login bitmap crash
+
+Kernel head f58902fb4299 adds F_SEAL_FUTURE_WRITE and the upstream MAP_PRIVATE
+COW correction. On-device strace confirms Google login fails when the running
+#5 kernel rejects immutable bitmap sealing with EINVAL. These commits require
+a server bootimage rebuild and runtime validation. See
+[google-login-fix.md](google-login-fix.md). No Google app data was cleared.

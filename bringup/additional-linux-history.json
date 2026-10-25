@@ -56,5 +56,17 @@
         "verified_at": null
       }
     }
+  },
+  {
+    "sha": "05d351102dbe4e103d6bdac18b1122cd3cd04925",
+    "commit": {
+      "author": {
+        "name": "Nicolas Geoffray",
+        "email": "ngeoffray@google.com",
+        "date": "2019-11-30T17:53:28-08:00"
+      },
+      "message": "mm, memfd: fix COW issue on MAP_PRIVATE and F_SEAL_FUTURE_WRITE mappings\n\nF_SEAL_FUTURE_WRITE has unexpected behavior when used with MAP_PRIVATE:\nA private mapping created after the memfd file that gets sealed with\nF_SEAL_FUTURE_WRITE loses the copy-on-write at fork behavior, meaning\nchildren and parent share the same memory, even though the mapping is\nprivate.\n\nThe reason for this is due to the code below:\n\n  static int shmem_mmap(struct file *file, struct vm_area_struct *vma)\n  {\n        struct shmem_inode_info *info = SHMEM_I(file_inode(file));\n\n        if (info->seals & F_SEAL_FUTURE_WRITE) {\n                /*\n                 * New PROT_WRITE and MAP_SHARED mmaps are not allowed when\n                 * \"future write\" seal active.\n                 */\n                if ((vma->vm_flags & VM_SHARED) && (vma->vm_flags & VM_WRITE))\n                        return -EPERM;\n\n                /*\n                 * Since the F_SEAL_FUTURE_WRITE seals allow for a MAP_SHARED\n                 * read-only mapping, take care to not allow mprotect to revert\n                 * protections.\n                 */\n                vma->vm_flags &= ~(VM_MAYWRITE);\n        }\n        ...\n  }\n\nAnd for the mm to know if a mapping is copy-on-write:\n\n  static inline bool is_cow_mapping(vm_flags_t flags)\n  {\n        return (flags & (VM_SHARED | VM_MAYWRITE)) == VM_MAYWRITE;\n  }\n\nThe patch fixes the issue by making the mprotect revert protection\nhappen only for shared mappings.  For private mappings, using mprotect\nwill have no effect on the seal behavior.\n\nThe F_SEAL_FUTURE_WRITE feature was introduced in v5.1 so v5.3.x stable\nkernels would need a backport.\n\n[akpm@linux-foundation.org: reflow comment, per Christoph]\nLink: http://lkml.kernel.org/r/20191107195355.80608-1-joel@joelfernandes.org\nFixes: ab3948f58ff84 (\"mm/memfd: add an F_SEAL_FUTURE_WRITE seal to memfd\")\nSigned-off-by: Nicolas Geoffray <ngeoffray@google.com>\nSigned-off-by: Joel Fernandes (Google) <joel@joelfernandes.org>\nCc: Hugh Dickins <hughd@google.com>\nCc: Shuah Khan <shuah@kernel.org>\nCc: <stable@vger.kernel.org>\nSigned-off-by: Andrew Morton <akpm@linux-foundation.org>\nSigned-off-by: Linus Torvalds <torvalds@linux-foundation.org>"
+    },
+    "source": "https://github.com/torvalds/linux/commit/05d351102dbe4e103d6bdac18b1122cd3cd04925"
   }
 ]

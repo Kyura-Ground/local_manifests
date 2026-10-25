@@ -1,5 +1,5 @@
 {
-  "kernel_commit": "e572bc741676e488e16b3bc909f95fc246ec688d",
+  "kernel_commit": "f58902fb4299738b5928d9b5254ef94b3b28ed98",
   "common_commit": "84b1432de1ee99574ba979e1aa4f4c2485a30043",
   "running_kernel": "4.4.302-CIP115 #5 Oct 25 18:16:47 UTC; does not include these new follow-ups",
   "checks": {
@@ -94,5 +94,7 @@
       "path": "axion-postboot-audit-20261026/hotspot-after-coldboot/netd.txt",
       "sha256": "37ea8a72821b25eab6267207b4a2fb8d0f5cb033755901946b4a16b236659b72"
     }
-  ]
+  ],
+  "previous_reviewed_kernel_commit": "e572bc741676e488e16b3bc909f95fc246ec688d",
+  "subsequent_review": "Memfd seal and MAP_PRIVATE COW follow-ups leave all previously reviewed cpuset and close_range paths unchanged."
 }

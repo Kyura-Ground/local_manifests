@@ -1,5 +1,5 @@
 {
-  "kernel_commit": "e572bc741676e488e16b3bc909f95fc246ec688d",
+  "kernel_commit": "f58902fb4299738b5928d9b5254ef94b3b28ed98",
   "checks": {
     "uapi_wipe18_keep19": true,
     "wipe_bit_unique": true,
