@@ -2,7 +2,7 @@
   "fix": {
     "upstream_repository": "https://github.com/XTENSEI/android_device_infinix_X6711",
     "upstream_commit": "f53b5f8de71d318783183455c1befc0fc3ebdf10",
-    "local_commit": "513d4aabb9eff14f3d0d431d2efced6974527720",
+    "local_commit": "48f1746ab16e3837643feb3d82907ca632e37a91",
     "branch": "axion-23.2-4.4",
     "adaptations": [
       "device.mk -> sdm660.mk",

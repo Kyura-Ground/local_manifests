@@ -5,7 +5,7 @@ Android initial boot is confirmed with user-supplied kernel #5 and the metadata
 hotfix: setup/home, boot_completed=1, registered RANGING permission and an empty
 post-boot crash logcat buffer. No local compilation or CI was run. The earlier
 allocator/BPF, integration and recovery failures are documented below, along
-with the current common-device fix 20c2f74b5b55. Hardware and repeat-boot tests
+with the current common-device fix 8668a65da69d. Hardware and repeat-boot tests
 remain pending.
 
 Read [opencode-review.md](opencode-review.md) for findings, commit mappings,
@@ -92,8 +92,9 @@ format fix does not add modern NLMSG xperm enforcement to the old kernel.
 
 Kernel #5 passed SELinux. The next system_server crash was RANGING permission
 lookup after aconfig failed without /metadata. LuK1337 d7b10b07e338 was picked
-as common device commit 20c2f74b5b55, adapting the two paths while retaining
-author/date/message/Change-Id and the same four added lines. The equivalent
+as common device commit 8668a65da69d, adapting the two paths while retaining
+author/date/raw message body/Change-Id and the same four added lines. The
+subject is adapted to the ASUS sdm660-common tree. The equivalent
 installed-image hotfix reached setup/home and ADB boot_completed=1.
 See [metadata-aconfig-fix.md](metadata-aconfig-fix.md) and
 `metadata-fix-audit.json`. Hardware, repeat boots and persistent metadata
@@ -102,9 +103,17 @@ services still need validation; the 10 MiB tmpfs is volatile.
 ## Post-boot follow-ups, 2026-10-26
 
 Kernel head e572bc741676 includes the reviewed cpuset mode and close_range
-backports; common head e1f6c62c52a9 removes the missing libRScpp pin entry.
+backports; common head 84b1432de1ee removes the missing libRScpp pin entry.
 These changes need a server rebuild. The running build #5 lacks them.
 Hotspot root cause is confirmed by strace: close_range returns ENOSYS and the
 netd child exits 127 before dnsmasq starts. Random warm-boot WLAN firmware
 absence remains a separate unresolved problem. Read
 [postboot-hotspot-fixes.md](postboot-hotspot-fixes.md) for evidence and limits.
+
+## Commit subject cleanup
+
+Five common-device titles and one manifest title were normalized for ASUS
+scope and consistent wording. Raw message bodies, author identities/dates,
+Change-Id and Signed-off-by trailers are unchanged. No source code changed.
+See [commit-subject-cleanup.md](commit-subject-cleanup.md) and its old/new hash
+mapping. All 1,540 kernel commits remain unchanged.

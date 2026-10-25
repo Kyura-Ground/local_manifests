@@ -12,18 +12,18 @@
   },
   "ant-upstream-reference": {
     "upstream": "92d6e5f457314077cd7a0dc0a54bea7ccaea4381",
-    "local_commit": "59b75b229c46913d6467a168102ac301f8f379f4",
-    "adaptation": "Map msm8998.mk to sdm660.mk; remove obsolete app and board selector, preserve com.dsi.ant HIDL library and proprietary HAL."
+    "local_commit": "bd247db62af833f0d281f8e9699f492bedb6458d",
+    "adaptation": "Map msm8998.mk to sdm660.mk; remove obsolete app and board selector, preserve com.dsi.ant HIDL library and proprietary HAL. Subject typo corrected from remanents to remnants; raw message body retained."
   },
   "kernel-fcm-reference": {
     "upstream": "f2b58971edc65d14b30918ff59f6e77049f6ef3c",
-    "local": "1167a0c34ff26068f9f0af0d7abaeb4a9e62cf2f",
+    "local": "fe5eb5f9065b420ef66fff627d909664544c998f",
     "adaptation": "Only device prefix adapted. Keep HAL FCM 6, explicitly use kernel FCM 5 with p_4.4 requirements from Axion matrix 5. PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS remains true.",
     "source": "https://github.com/xiaomi-msm8998-devs/android_device_xiaomi_msm8998-common/commit/f2b58971edc65d14b30918ff59f6e77049f6ef3c"
   },
   "livedisplay-upstream-reference": {
     "upstream": "38208444bb38d1b52fc5ade2709e09be3f942951",
-    "local": "0b59faf50db93110f063aef8c7627712aa089d5f",
+    "local": "69910e34fb919f638752b90b1a69742827e08405",
     "adaptations": [
       "msm8998.mk -> sdm660.mk",
       "Remove existing ASUS HIDL block, which declares IPictureAdjustment only",
@@ -34,25 +34,25 @@
   },
   "tetheroffload-upstream-reference": {
     "upstream": "eb33d71461d34b21f78ec6b96b42544f4b056438",
-    "local": "61091dc9f617795420b7e46da4c7ceb814d90bcc",
+    "local": "fc992740665023ffcf42346410dfa52590cf3bc4",
     "evidence": [
       "FCM 6 declares control HAL 1.1",
       "Axion manifest uses data-ipa-cfg-mgr lineage-23.2-legacy-um",
       "HAL.h includes control/1.1/IOffloadControl.h and selects V1_1::IOffloadControl",
       "HAL.cpp registers IOffloadControl::registerAsService()"
     ],
-    "adaptation": "Device prefix only"
+    "adaptation": "Device prefix adapted; subject now says Update to version 1.1; raw message body retained."
   },
   "bpf-override-reference": {
     "changes": [
       {
         "upstream": "daa55cb98f0c8304da97704056a9c5e5c02b2ccb",
-        "local": "90612fface170d5813dcbf4d30a95f1addde3b0e",
+        "local": "63d84d90f24a212e26a083b4c42185ca6b94497c",
         "adaptation": "Device prefix and insertion position only; preserve existing ASUS product properties and LF line endings."
       },
       {
         "upstream": "c144dd88cdced0df40dd5a6884c1554660113d19",
-        "local": "c31c0903a77bb5bb6e0b1fac1ffad0191044856f",
+        "local": "da5f9c894dfba89977e92c58b06368deb1895b37",
         "adaptation": "Device prefix and insertion position only; preserve existing ASUS product properties and LF line endings."
       }
     ],
@@ -71,7 +71,7 @@
   "signing-inheritance-fix": {
     "upstream_repository": "https://github.com/XTENSEI/android_device_infinix_X6711",
     "upstream_commit": "f53b5f8de71d318783183455c1befc0fc3ebdf10",
-    "local_commit": "513d4aabb9eff14f3d0d431d2efced6974527720",
+    "local_commit": "48f1746ab16e3837643feb3d82907ca632e37a91",
     "branch": "axion-23.2-4.4",
     "adaptations": [
       "device.mk -> sdm660.mk",

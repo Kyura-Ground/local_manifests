@@ -667,11 +667,10 @@
     ]
   },
   "metadata_aconfig_fix": {
-    "common_commit": "20c2f74b5b55fe9d03d805190b7220aa27fa7d58",
+    "common_commit": "8668a65da69d447ff4ef4f49d95485e2c422f84e",
     "upstream": "https://github.com/Tomoms/android_device_essential_mata/commit/d7b10b07e338e0768fa5c52df27e0b253a018ac9",
-    "adaptation": "Map BoardConfig.mk to BoardConfigCommon.mk and init.mata.rc to init.target.rc; same four inserted lines. Original subject/author/date/body/Change-Id retained.",
+    "adaptation": "Map BoardConfig.mk to BoardConfigCommon.mk and init.mata.rc to init.target.rc; same four inserted lines. Subject adapted from mata to sdm660-common; original author/date/raw message body/Change-Id retained. See commit-subject-cleanup.json.",
     "checks": {
-      "upstream_author_date_full_message_preserved": true,
       "local_commit_signature_valid": true,
       "only_mapped_reference_files_changed": true,
       "metadata_mountpoint_generated_by_build": true,
@@ -683,7 +682,9 @@
       "RANGING_permission_registered_after_boot": true,
       "metadata_tmpfs_observed_after_boot": true,
       "no_crash_buffer_entries_after_boot": true,
-      "metadata_source_paths_unchanged_at_reviewed_head": true
+      "metadata_source_paths_unchanged_at_reviewed_head": true,
+      "upstream_author_date_raw_body_preserved": true,
+      "subject_adaptation_recorded": true
     },
     "common_new_signed_commits": 11,
     "user_report": "Setup/home screen reached after live metadata hotfix.",
@@ -702,7 +703,7 @@
       "crash_logcat_capture": "successful; buffer empty",
       "hardware_and_repeat_reboot_tests": "pending"
     },
-    "reviewed_common_commit": "e1f6c62c52a92b1bb1efe0248e0616c70195f01b"
+    "reviewed_common_commit": "84b1432de1ee99574ba979e1aa4f4c2485a30043"
   },
   "package_validation": {
     "filename": "axion-2.9-NOESIS-20261025-UNOFFICIAL-VANILLA-X00TD-bootfix.zip",
@@ -718,7 +719,7 @@
   },
   "postboot_followups": {
     "kernel_commit": "e572bc741676e488e16b3bc909f95fc246ec688d",
-    "common_commit": "e1f6c62c52a92b1bb1efe0248e0616c70195f01b",
+    "common_commit": "84b1432de1ee99574ba979e1aa4f4c2485a30043",
     "running_kernel": "4.4.302-CIP115 #5 Oct 25 18:16:47 UTC; does not include these new follow-ups",
     "checks": {
       "observed_close_range_436_enosys": true,
@@ -765,7 +766,7 @@
       {
         "problem": "PinnerService opens removed libRScpp.so",
         "upstream": "https://github.com/crdroidandroid/android_device_xiaomi_sdm660-common/commit/7c5b1a27f8058ca526ad8cd7c488c79bc73c43b7",
-        "local_commit": "e1f6c62c52a92b1bb1efe0248e0616c70195f01b",
+        "local_commit": "84b1432de1ee99574ba979e1aa4f4c2485a30043",
         "status": "source fixed; overlay rebuild pending"
       }
     ],
@@ -813,5 +814,15 @@
         "sha256": "37ea8a72821b25eab6267207b4a2fb8d0f5cb033755901946b4a16b236659b72"
       }
     ]
+  },
+  "commit_subject_cleanup": {
+    "common_head": "84b1432de1ee99574ba979e1aa4f4c2485a30043",
+    "common_tree_identical_to_previous_head": true,
+    "all_twelve_patch_trees_identical": true,
+    "upstream_author_date_raw_body_trailers_preserved": true,
+    "all_rewritten_commits_signed": true,
+    "kernel_head_unchanged": "e572bc741676e488e16b3bc909f95fc246ec688d",
+    "source_change": false,
+    "build_required_for_commit_cleanup": false
   }
 }

@@ -1,9 +1,8 @@
 {
-  "common_commit": "20c2f74b5b55fe9d03d805190b7220aa27fa7d58",
+  "common_commit": "8668a65da69d447ff4ef4f49d95485e2c422f84e",
   "upstream": "https://github.com/Tomoms/android_device_essential_mata/commit/d7b10b07e338e0768fa5c52df27e0b253a018ac9",
-  "adaptation": "Map BoardConfig.mk to BoardConfigCommon.mk and init.mata.rc to init.target.rc; same four inserted lines. Original subject/author/date/body/Change-Id retained.",
+  "adaptation": "Map BoardConfig.mk to BoardConfigCommon.mk and init.mata.rc to init.target.rc; same four inserted lines. Subject adapted from mata to sdm660-common; original author/date/raw message body/Change-Id retained. See commit-subject-cleanup.json.",
   "checks": {
-    "upstream_author_date_full_message_preserved": true,
     "local_commit_signature_valid": true,
     "only_mapped_reference_files_changed": true,
     "metadata_mountpoint_generated_by_build": true,
@@ -15,7 +14,9 @@
     "RANGING_permission_registered_after_boot": true,
     "metadata_tmpfs_observed_after_boot": true,
     "no_crash_buffer_entries_after_boot": true,
-    "metadata_source_paths_unchanged_at_reviewed_head": true
+    "metadata_source_paths_unchanged_at_reviewed_head": true,
+    "upstream_author_date_raw_body_preserved": true,
+    "subject_adaptation_recorded": true
   },
   "common_new_signed_commits": 11,
   "user_report": "Setup/home screen reached after live metadata hotfix.",
@@ -34,5 +35,5 @@
     "crash_logcat_capture": "successful; buffer empty",
     "hardware_and_repeat_reboot_tests": "pending"
   },
-  "reviewed_common_commit": "e1f6c62c52a92b1bb1efe0248e0616c70195f01b"
+  "reviewed_common_commit": "84b1432de1ee99574ba979e1aa4f4c2485a30043"
 }

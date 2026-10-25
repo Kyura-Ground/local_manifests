@@ -1,6 +1,6 @@
 {
   "kernel_commit": "e572bc741676e488e16b3bc909f95fc246ec688d",
-  "common_commit": "e1f6c62c52a92b1bb1efe0248e0616c70195f01b",
+  "common_commit": "84b1432de1ee99574ba979e1aa4f4c2485a30043",
   "running_kernel": "4.4.302-CIP115 #5 Oct 25 18:16:47 UTC; does not include these new follow-ups",
   "checks": {
     "observed_close_range_436_enosys": true,
@@ -47,7 +47,7 @@
     {
       "problem": "PinnerService opens removed libRScpp.so",
       "upstream": "https://github.com/crdroidandroid/android_device_xiaomi_sdm660-common/commit/7c5b1a27f8058ca526ad8cd7c488c79bc73c43b7",
-      "local_commit": "e1f6c62c52a92b1bb1efe0248e0616c70195f01b",
+      "local_commit": "84b1432de1ee99574ba979e1aa4f4c2485a30043",
       "status": "source fixed; overlay rebuild pending"
     }
   ],

@@ -18,11 +18,13 @@ consequence, not the original permission error.
 LuK1337's
 [d7b10b07e338e0768fa5c52df27e0b253a018ac9](https://github.com/Tomoms/android_device_essential_mata/commit/d7b10b07e338e0768fa5c52df27e0b253a018ac9)
 adds a faux metadata mount for aconfig. It was cherry-picked as
-`20c2f74b5b55fe9d03d805190b7220aa27fa7d58`, mapping BoardConfig.mk to
+`8668a65da69d447ff4ef4f49d95485e2c422f84e`, mapping BoardConfig.mk to
 BoardConfigCommon.mk and init.mata.rc to init.target.rc. The same four inserted
 lines are retained: BOARD_USES_METADATA_PARTITION=true and an on-fs tmpfs mount
-after mount_all. Author, author date, original subject/message and Change-Id
-are unchanged. The adapted commit has a valid local GPG signature.
+after mount_all. Author, author date, raw message body and Change-Id
+are unchanged. The subject now uses the ASUS sdm660-common prefix; this
+adaptation is recorded in commit-subject-cleanup.json. The adapted commit
+has a valid local GPG signature.
 
 The board flag ensures a metadata mount point is generated in the system root.
 The on-fs action mounts tmpfs before aconfig's post-fs initialization. Axion's

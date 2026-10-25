@@ -65,9 +65,10 @@ controller and task-profile application after boot.
 ## Pinner cleanup
 
 [7c5b1a27f805](https://github.com/crdroidandroid/android_device_xiaomi_sdm660-common/commit/7c5b1a27f8058ca526ad8cd7c488c79bc73c43b7)
--> common e1f6c62c52a92b1bb1efe0248e0616c70195f01b removes only the stale
-/system/lib64/libRScpp.so pin entry, adapting the overlay path. Author/date/full
-message and the other pin entries are retained. This overlay needs a ROM rebuild;
+-> common 84b1432de1ee99574ba979e1aa4f4c2485a30043 removes only the stale
+/system/lib64/libRScpp.so pin entry, adapting the overlay path. Author, author
+date, raw message body and the other pin entries are retained. Its local subject
+now names the actual overlay path and removed library. This overlay needs a ROM rebuild;
 a kernel-only rebuild cannot apply it.
 
 ## Separate unresolved Wi-Fi firmware failure
