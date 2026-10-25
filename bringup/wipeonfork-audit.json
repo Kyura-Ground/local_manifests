@@ -1,0 +1,26 @@
+{
+  "kernel_commit": "630e76d696e709c551f5666bc2b20e90b53dcb11",
+  "checks": {
+    "uapi_wipe18_keep19": true,
+    "wipe_bit_unique": true,
+    "legacy_mpx_flag_preserved": true,
+    "private_anonymous_only": true,
+    "wipe_sets_and_keep_clears": true,
+    "validation_accepts_both_advices": true,
+    "mmap_write_lock_default": true,
+    "child_pages_not_copied": true,
+    "child_anon_vma_reset_lazily": true,
+    "no_eager_anon_vma_prepare": true,
+    "smaps_wf_visible": true,
+    "arm64_generates_generic_mman": true
+  },
+  "scope": "Static source-contract review only. No compilation, C execution, fork/madvise runtime validation, or device image writes.",
+  "runtime_required": [
+    "advice 18/19 accepted",
+    "child and grandchild see zeroes; parent retains memory",
+    "KEEPONFORK restores inheritance",
+    "shared/file-backed mappings reject WIPEONFORK",
+    "partial-range split and repeated forks",
+    "A16 recovery and updater startup on rebuilt kernel"
+  ]
+}

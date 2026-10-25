@@ -14,8 +14,8 @@ It is a source snapshot, not a revision-locked manifest of the complete platform
 The device metadata is for the user's confirmed 4 GB / 13+5 MP rear / 8 MP front
 X00TD variant. The SoC is Snapdragon 636 despite the shared sdm660 platform name.
 
-`kernel-cherry-picks.jsonl` records 1,533 upstream-derived commits and one local
-correction (1,534 signed new kernel commits). Upstream author, author date and
+`kernel-cherry-picks.jsonl` records 1,535 upstream-derived commits and one local
+correction (1,536 signed new kernel commits). Upstream author, author date and
 message bodies were verified. Prefix/path adaptations and partial picks are
 explicitly recorded. Empty/already implemented changes are journaled separately.
 The ASUS CIP115 base, existing blobs and signing identity remain unchanged.
@@ -59,3 +59,15 @@ active and Kernel Manager reads supported clocks from sysfs.
 Original upstream Test lines describe upstream testing. New source needs a
 server rebuild and device checks for boot, BPF loading, VINTF, Wi-Fi across cold
 boot/reboot, encryption, camera/audio/modem and Kernel Manager in SELinux enforcing.
+
+## WIPEONFORK flash/recovery failure follow-up
+
+A16 bionic aborts at arc4random when MADV_WIPEONFORK is unavailable. Read-only
+ADB logs confirm updater signal 6 after successful OTA signature verification;
+pstore also confirms the A16 recovery init panic. The missing feature is now
+backported in kernel commits 73f0cf362c07 and 630e76d696e7.
+See [wipeonfork-fix.md](wipeonfork-fix.md) in the published bringup records.
+The old ZIP remains unchanged. Rebuild kernel/boot/recovery/ZIP on the server,
+then use the rebuilt recovery to install the rebuilt ZIP. No local build or
+device image write was performed. Kernel-only image builds are also possible
+but require integrating both new images into the package/install procedure.

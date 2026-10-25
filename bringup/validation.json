@@ -1,8 +1,8 @@
 {
-  "scope": "Review of OpenCode fixes and Axion README integration. User reports compilation succeeded before this review. New commits require a server rebuild and device testing; no local compilation, CI or ADB was performed.",
+  "scope": "Source candidate after flash/recovery failure diagnosis. ADB read-only logs show A16 arc4random abort on missing WIPEONFORK; new source requires server rebuild and runtime validation. No local compilation or device image writes.",
   "kernel_provenance": {
-    "kernel_commit": "59588a8e31a9bc8488cf30cedad153919fbd6f4e",
-    "upstream_metadata_checked": 1533,
+    "kernel_commit": "630e76d696e709c551f5666bc2b20e90b53dcb11",
+    "upstream_metadata_checked": 1535,
     "metadata_failures": [],
     "local_fixes": [
       {
@@ -33,21 +33,20 @@
         "adaptation": "Map BPF_STREAM_PARSER=y and explicit TLS disable to X00TD; omit unrelated SLUB line reordering from the Xiaomi defconfig."
       }
     ],
-    "local_signed_commits": 1534,
+    "local_signed_commits": 1536,
     "invalid_signatures": [],
     "commits_not_in_journal": [],
     "no_compilation_performed": true,
     "build_progress": {
-      "platform": "ServerHive",
-      "reported_by": "user",
-      "last_report": "Compilation succeeded before the review follow-ups.",
-      "new_followups_status": "Server rebuild and device validation pending.",
+      "last_observed": "Axion updater SIGABRT/MADV_WIPEONFORK after successful signature verification; prior A16 recovery boot panics at init on same error.",
+      "fix_head": "630e76d696e709c551f5666bc2b20e90b53dcb11",
+      "rebuild_status": "pending server rebuild of kernel/boot/recovery/ZIP",
       "local_build_run": false
     }
   },
   "bpf_source_comparison": {
     "reference": "15e2687e40a47a7e6bb86dbf746a37c657b2092f",
-    "kernel_commit": "59588a8e31a9bc8488cf30cedad153919fbd6f4e",
+    "kernel_commit": "630e76d696e709c551f5666bc2b20e90b53dcb11",
     "scope": "BPF source, shared headers, ARM64 JIT, parser and network integrations; string/line comparisons, not a compiler or runtime test.",
     "files": [
       {
@@ -383,7 +382,8 @@
       "include/uapi/linux/bpf.h": "Add the matching upstream skb ancestor helper documentation; helper enumeration is unchanged."
     },
     "configuration_evidence": "kernel-kconfig-audit.json",
-    "previous_comparison_commit": "5300fb19f36c3b876089ac1f3c367cff4332c5b5"
+    "previous_comparison_commit": "5300fb19f36c3b876089ac1f3c367cff4332c5b5",
+    "comparison_commit_note": "The WIPEONFORK follow-up changes mm/fork/UAPI mman and smaps only; the 54 compared BPF files are unchanged from 59588a8e31a9."
   },
   "kconfig": {
     "scope": "Read-only Kconfiglib evaluation; external commands disabled. No compiler, make, .config, or generated C headers.",
@@ -496,6 +496,8 @@
     "provenance_matches_current_kernel": true,
     "review_matches_current_sources": true,
     "opencode_followup_contracts": true,
+    "a16_wipeonfork_contracts": true,
+    "wipeonfork_review_current": true,
     "bpf_feature_version_property": true,
     "signing_keys_loaded_by_platform_only": true
   },
@@ -549,7 +551,7 @@
   },
   "opencode_review": {
     "scope": "Source contracts, mechanical diffs and XML/permission review. No compiler, policy compiler, build, CI, ADB or runtime test.",
-    "kernel_commit": "59588a8e31a9bc8488cf30cedad153919fbd6f4e",
+    "kernel_commit": "630e76d696e709c551f5666bc2b20e90b53dcb11",
     "device_commit": "2acde968f0da2192a664481a625be60cc7e6816d",
     "checks": {
       "slab_rename_mechanical": true,
@@ -585,8 +587,35 @@
     "local_build_run": false
   },
   "new_diff_whitespace": {
-    "range": "39062a7758fab196d0dddc508510aab57f429625..59588a8e31a9bc8488cf30cedad153919fbd6f4e",
+    "range": "59588a8e31a9bc8488cf30cedad153919fbd6f4e..630e76d696e709c551f5666bc2b20e90b53dcb11",
     "result": "PASS",
-    "scope": "New review commits only; older upstream format findings remain recorded separately."
-  }
+    "scope": "WIPEONFORK commits only; older upstream findings remain historical."
+  },
+  "wipeonfork_review": {
+    "kernel_commit": "630e76d696e709c551f5666bc2b20e90b53dcb11",
+    "checks": {
+      "uapi_wipe18_keep19": true,
+      "wipe_bit_unique": true,
+      "legacy_mpx_flag_preserved": true,
+      "private_anonymous_only": true,
+      "wipe_sets_and_keep_clears": true,
+      "validation_accepts_both_advices": true,
+      "mmap_write_lock_default": true,
+      "child_pages_not_copied": true,
+      "child_anon_vma_reset_lazily": true,
+      "no_eager_anon_vma_prepare": true,
+      "smaps_wf_visible": true,
+      "arm64_generates_generic_mman": true
+    },
+    "scope": "Static source-contract review only. No compilation, C execution, fork/madvise runtime validation, or device image writes.",
+    "runtime_required": [
+      "advice 18/19 accepted",
+      "child and grandchild see zeroes; parent retains memory",
+      "KEEPONFORK restores inheritance",
+      "shared/file-backed mappings reject WIPEONFORK",
+      "partial-range split and repeated forks",
+      "A16 recovery and updater startup on rebuilt kernel"
+    ]
+  },
+  "diagnostic_device_access": "Read-only ADB pull/shell for recovery log, pstore, uname/properties and updater hash. No flash, boot command, sideload, reboot or partition writes."
 }

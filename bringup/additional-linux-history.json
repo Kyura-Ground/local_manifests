@@ -27,5 +27,34 @@
         "verified_at": null
       }
     }
+  },
+  {
+    "sha": "93949bb21b52aae924fd26f9775c8655dd9e885e",
+    "commit": {
+      "author": {
+        "name": "Li Xinhai",
+        "email": "lixinhai.lxh@gmail.com",
+        "date": "2020-04-07T03:03:33Z"
+      },
+      "committer": {
+        "name": "Linus Torvalds",
+        "email": "torvalds@linux-foundation.org",
+        "date": "2020-04-07T17:43:37Z"
+      },
+      "message": "mm: don't prepare anon_vma if vma has VM_WIPEONFORK\n\nPatch series \"mm: Fix misuse of parent anon_vma in dup_mmap path\".\n\nThis patchset fixes the misuse of parenet anon_vma, which mainly caused by\nchild vma's vm_next and vm_prev are left same as its parent after\nduplicate vma.  Finally, code reached parent vma's neighbor by referring\npointer of child vma and executed wrong logic.\n\nThe first two patches fix relevant issues, and the third patch sets\nvm_next and vm_prev to NULL when duplicate vma to prevent potential misuse\nin future.\n\nEffects of the first bug is that causes rmap code to check both parent and\nchild's page table, although a page couldn't be mapped by both parent and\nchild, because child vma has WIPEONFORK so all pages mapped by child are\n'new' and not relevant to parent.\n\nEffects of the second bug is that the relationship of anon_vma of parent\nand child are totallyconvoluted.  It would cause 'son', 'grandson', ...,\netc, to share 'parent' anon_vma, which disobey the design rule of reusing\nanon_vma (the rule to be followed is that reusing should among vma of same\nprocess, and vma should not gone through fork).\n\nSo, both issues should cause unnecessary rmap walking and have unexpected\ncomplexity.\n\nThese two issues would not be directly visible, I used debugging code to\ncheck the anon_vma pointers of parent and child when inspecting the\nsuspicious implementation of issue #2, then find the problem.\n\nThis patch (of 3):\n\nIn dup_mmap(), anon_vma_prepare() is called for vma has VM_WIPEONFORK, and\nparameter 'tmp' (i.e., the new vma of child) has same ->vm_next and\n->vm_prev as its parent vma.  That allows anon_vma used by parent been\nmistakenly shared by child (find_mergeable_anon_vma() will do this reuse\nwork).\n\nBesides this issue, call anon_vma_prepare() should be avoided because we\ndon't copy page for this vma.  Preparing anon_vma will be handled during\nfault.\n\nFixes: d2cd9ede6e19 (\"mm,fork: introduce MADV_WIPEONFORK\")\nSigned-off-by: Li Xinhai <lixinhai.lxh@gmail.com>\nSigned-off-by: Andrew Morton <akpm@linux-foundation.org>\nAcked-by: Kirill A. Shutemov <kirill.shutemov@linux.intel.com>\nCc: Rik van Riel <riel@redhat.com>\nCc: Kirill A. Shutemov <kirill.shutemov@linux.intel.com>\nCc: Johannes Weiner <hannes@cmpxchg.org>\nLink: http://lkml.kernel.org/r/1581150928-3214-2-git-send-email-lixinhai.lxh@gmail.com\nSigned-off-by: Linus Torvalds <torvalds@linux-foundation.org>",
+      "tree": {
+        "sha": "3b11136e898395f1cda26f7caa08a5d8aadef1f6",
+        "url": "https://api.github.com/repos/torvalds/linux/git/trees/3b11136e898395f1cda26f7caa08a5d8aadef1f6"
+      },
+      "url": "https://api.github.com/repos/torvalds/linux/git/commits/93949bb21b52aae924fd26f9775c8655dd9e885e",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    }
   }
 ]

@@ -25,3 +25,7 @@ The [bringup records](bringup/README.md) contain upstream commit mappings,
 ASUS source hashes and the scope of static validation.
 
 Reference: [AxionOS A16 manifest](https://github.com/AxionAOSP/android/tree/lineage-23.2).
+
+The current A16 flash failure (updater signal 6) and recovery init panic are
+caused by missing kernel MADV_WIPEONFORK. Source fix is published; the existing
+ZIP requires a rebuild. See [diagnosis](bringup/wipeonfork-fix.md).
