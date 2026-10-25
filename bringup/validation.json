@@ -1,9 +1,21 @@
 {
-  "scope": "Source-only candidate for the first server build. No ROM compilation, CI or device boot validation performed.",
+  "scope": "Review of OpenCode fixes and Axion README integration. User reports compilation succeeded before this review. New commits require a server rebuild and device testing; no local compilation, CI or ADB was performed.",
   "kernel_provenance": {
-    "kernel_commit": "39062a7758fab196d0dddc508510aab57f429625",
-    "upstream_metadata_checked": 1531,
+    "kernel_commit": "59588a8e31a9bc8488cf30cedad153919fbd6f4e",
+    "upstream_metadata_checked": 1533,
     "metadata_failures": [],
+    "local_fixes": [
+      {
+        "upstream": null,
+        "local_commit": "4e34303b063b4ae88314fdef53cf8174dd656bda",
+        "title": "bpf: Preserve kernfs IDs in the ancestor cgroup helper",
+        "status": "local-fix",
+        "references": [
+          "https://github.com/torvalds/linux/commit/0f09abd105da6c37713d2b253730a86cb45e127a"
+        ],
+        "reason": "No exact standalone legacy-ID-substitution fix found. Correct the earlier msm8998-derived backport: ancestor->id is an internal IDR int, but this API must return the same 64-bit kernfs ID as bpf_get_current_cgroup_id at the current level."
+      }
+    ],
     "title_adaptations": [
       {
         "upstream": "9ce9edd2746230fa9bdc1603a9221475e6de21d9",
@@ -21,22 +33,21 @@
         "adaptation": "Map BPF_STREAM_PARSER=y and explicit TLS disable to X00TD; omit unrelated SLUB line reordering from the Xiaomi defconfig."
       }
     ],
-    "local_signed_commits": 1531,
+    "local_signed_commits": 1534,
     "invalid_signatures": [],
     "commits_not_in_journal": [],
     "no_compilation_performed": true,
     "build_progress": {
       "platform": "ServerHive",
-      "latest_observed_failure": "kernel/bpf/btf.c: implicit declaration of kvzalloc/kvmalloc",
-      "fix_commit": "39062a7758fab196d0dddc508510aab57f429625",
-      "fix_source": "a7c3e901a46ff54c016d040847eda598a9e3e653",
-      "rebuild_status": "pending; no Image.gz-dtb yet",
+      "reported_by": "user",
+      "last_report": "Compilation succeeded before the review follow-ups.",
+      "new_followups_status": "Server rebuild and device validation pending.",
       "local_build_run": false
     }
   },
   "bpf_source_comparison": {
     "reference": "15e2687e40a47a7e6bb86dbf746a37c657b2092f",
-    "kernel_commit": "5300fb19f36c3b876089ac1f3c367cff4332c5b5",
+    "kernel_commit": "59588a8e31a9bc8488cf30cedad153919fbd6f4e",
     "scope": "BPF source, shared headers, ARM64 JIT, parser and network integrations; string/line comparisons, not a compiler or runtime test.",
     "files": [
       {
@@ -95,8 +106,8 @@
       },
       {
         "path": "include/uapi/linux/bpf.h",
-        "exact": true,
-        "same_nonblank_stripped_lines": true,
+        "exact": false,
+        "same_nonblank_stripped_lines": false,
         "present": true
       },
       {
@@ -185,8 +196,8 @@
       },
       {
         "path": "kernel/bpf/helpers.c",
-        "exact": true,
-        "same_nonblank_stripped_lines": true,
+        "exact": false,
+        "same_nonblank_stripped_lines": false,
         "present": true
       },
       {
@@ -323,8 +334,8 @@
       },
       {
         "path": "net/core/filter.c",
-        "exact": true,
-        "same_nonblank_stripped_lines": true,
+        "exact": false,
+        "same_nonblank_stripped_lines": false,
         "present": true
       },
       {
@@ -366,17 +377,16 @@
     ],
     "reviewed_differences": {
       "arch/arm64/net/bpf_jit_comp.c": "Two additional blank lines only.",
-      "kernel/bpf/core.c": "Retain baseline __GFP_HIGHMEM flags in vmalloc allocation. ARM64 has no HIGHMEM zone. Generic JIT helpers retain module allocator calls; X00TD evaluates MODULES=y, which selects the same reference allocator path. ARM64 supplies its own JIT allocator."
+      "kernel/bpf/core.c": "Retain baseline __GFP_HIGHMEM flags in vmalloc allocation. ARM64 has no HIGHMEM zone. Generic JIT helpers retain module allocator calls; X00TD evaluates MODULES=y, which selects the same reference allocator path. ARM64 supplies its own JIT allocator.",
+      "kernel/bpf/helpers.c": "Fix the reference backport to return the 64-bit kernfs ID for ancestor cgroups, matching current-cgroup IDs and Linux 0f09abd105da6c.",
+      "net/core/filter.c": "Complete Linux 7723628101aa helper body and TC registration that the initial cgroup prerequisite pick omitted; helper block matches original Linux source exactly.",
+      "include/uapi/linux/bpf.h": "Add the matching upstream skb ancestor helper documentation; helper enumeration is unchanged."
     },
     "configuration_evidence": "kernel-kconfig-audit.json",
-    "comparison_commit_note": "Comparison was taken at 5300fb19f36c. Commit 39062a7758fa changes only include/linux/mm.h, mm/util.c and fs/f2fs/f2fs.h; none of the 54 compared BPF files changed."
+    "previous_comparison_commit": "5300fb19f36c3b876089ac1f3c367cff4332c5b5"
   },
   "kconfig": {
-    "checks": {
-      "bpf_and_dependency_flags_enabled": true,
-      "tls_not_enabled_by_new_default": true,
-      "reviewed_module_allocator_configuration": true
-    },
+    "scope": "Read-only Kconfiglib evaluation; external commands disabled. No compiler, make, .config, or generated C headers.",
     "values": {
       "BPF": "y",
       "BPF_SYSCALL": "y",
@@ -397,13 +407,76 @@
       "IPV6": "y",
       "NAMESPACES": "y",
       "INET": "y",
+      "MMU": "y",
+      "CGROUPS": "y",
+      "SOCK_CGROUP_DATA": "y",
       "CFI_CLANG": null,
       "TLS": "n",
       "MODULES": "y",
-      "HIGHMEM": null
+      "HIGHMEM": null,
+      "SECURITY_APPARMOR": "n",
+      "XFRM_USER_COMPAT": "n"
+    },
+    "checks": {
+      "bpf_and_dependency_flags_enabled": true,
+      "tls_not_enabled_by_new_default": true,
+      "reviewed_module_allocator_configuration": true,
+      "dormant_private_allocator_collisions_not_built": true
     },
     "warning_count": 51,
-    "warning_scope": "Existing Kconfig style/choice warnings; not C compiler diagnostics."
+    "warnings": [
+      "block/Kconfig:134: warning: style: quotes recommended around 'block/Kconfig.iosched' in 'source block/Kconfig.iosched'",
+      "arch/arm64/Kconfig:711: warning: style: quotes recommended around 'kernel/Kconfig.preempt' in 'source kernel/Kconfig.preempt'",
+      "arch/arm64/Kconfig:712: warning: style: quotes recommended around 'kernel/Kconfig.hz' in 'source kernel/Kconfig.hz'",
+      "warning: SCSI_DPT_I2O (defined at drivers/scsi/Kconfig:488) has leading or trailing whitespace in its prompt",
+      "warning: ATM_FIRESTREAM (defined at drivers/atm/Kconfig:148) has leading or trailing whitespace in its prompt",
+      "warning: IWLWIFI (defined at drivers/net/wireless/iwlwifi/Kconfig:1) has leading or trailing whitespace in its prompt",
+      "drivers/i2c/Kconfig:70: warning: style: quotes recommended around 'drivers/i2c/muxes/Kconfig' in 'source drivers/i2c/muxes/Kconfig'",
+      "drivers/i2c/Kconfig:96: warning: style: quotes recommended around 'drivers/i2c/algos/Kconfig' in 'source drivers/i2c/algos/Kconfig'",
+      "drivers/i2c/Kconfig:97: warning: style: quotes recommended around 'drivers/i2c/busses/Kconfig' in 'source drivers/i2c/busses/Kconfig'",
+      "drivers/pps/Kconfig:43: warning: style: quotes recommended around 'drivers/pps/clients/Kconfig' in 'source drivers/pps/clients/Kconfig'",
+      "drivers/pps/Kconfig:45: warning: style: quotes recommended around 'drivers/pps/generators/Kconfig' in 'source drivers/pps/generators/Kconfig'",
+      "drivers/w1/Kconfig:28: warning: style: quotes recommended around 'drivers/w1/masters/Kconfig' in 'source drivers/w1/masters/Kconfig'",
+      "drivers/w1/Kconfig:29: warning: style: quotes recommended around 'drivers/w1/slaves/Kconfig' in 'source drivers/w1/slaves/Kconfig'",
+      "drivers/hwmon/Kconfig:1231: warning: style: quotes recommended around 'drivers/hwmon/pmbus/Kconfig' in 'source drivers/hwmon/pmbus/Kconfig'",
+      "warning: REGULATOR_MAX8973 (defined at drivers/regulator/Kconfig:393) has leading or trailing whitespace in its prompt",
+      "warning: FB_I810_I2C (defined at drivers/video/fbdev/Kconfig:1150) has 'help' but empty help text",
+      "warning: FB_MSM_MDSS_HDMI_MHL_SII8334 (defined at drivers/video/fbdev/msm/Kconfig:73) has leading or trailing whitespace in its prompt",
+      "warning: MMC_TOSHIBA_PCI (defined at drivers/mmc/host/Kconfig:829) has 'help' but empty help text",
+      "warning: MEMSTICK_TIFM_MS (defined at drivers/memstick/host/Kconfig:7) has leading or trailing whitespace in its prompt",
+      "warning: PANEL_LCD_PIN_E (defined at drivers/staging/panel/Kconfig:164) has leading or trailing whitespace in its prompt",
+      "warning: PANEL_LCD_PIN_RS (defined at drivers/staging/panel/Kconfig:179) has leading or trailing whitespace in its prompt",
+      "warning: PANEL_LCD_PIN_RW (defined at drivers/staging/panel/Kconfig:194) has leading or trailing whitespace in its prompt",
+      "warning: PANEL_LCD_PIN_SCL (defined at drivers/staging/panel/Kconfig:209) has leading or trailing whitespace in its prompt",
+      "warning: PANEL_LCD_PIN_SDA (defined at drivers/staging/panel/Kconfig:224) has leading or trailing whitespace in its prompt",
+      "warning: PANEL_LCD_PIN_BL (defined at drivers/staging/panel/Kconfig:239) has leading or trailing whitespace in its prompt",
+      "warning: RTL8192U (defined at drivers/staging/rtl8192u/Kconfig:1) has 'help' but empty help text",
+      "warning: RTL8192E (defined at drivers/staging/rtl8192e/rtl8192e/Kconfig:1) has 'help' but empty help text",
+      "drivers/ras/Kconfig:33: warning: style: quotes recommended around 'arch/x86/ras/Kconfig' in 'source arch/x86/ras/Kconfig'",
+      "arch/arm64/kvm/Kconfig:50: warning: style: quotes recommended around 'drivers/vhost/Kconfig' in 'source drivers/vhost/Kconfig'",
+      "warning: ARCH_WANT_FRAME_POINTERS (defined at lib/Kconfig.debug:345) has 'help' but empty help text",
+      "lib/Kconfig.debug:409: warning: style: quotes recommended around 'mm/Kconfig.debug' in 'source mm/Kconfig.debug'",
+      "lib/Kconfig.debug:1749: warning: style: quotes recommended around 'kernel/trace/Kconfig' in 'source kernel/trace/Kconfig'",
+      "warning: ARM64_STRICT_BREAK_BEFORE_MAKE (defined at arch/arm64/Kconfig.debug:125) has leading or trailing whitespace in its prompt",
+      "security/Kconfig:7: warning: style: quotes recommended around 'security/keys/Kconfig' in 'source security/keys/Kconfig'",
+      "security/Kconfig:10: warning: style: quotes recommended around 'security/pfe/Kconfig' in 'source security/pfe/Kconfig'",
+      "security/Kconfig:185: warning: style: quotes recommended around 'security/selinux/Kconfig' in 'source security/selinux/Kconfig'",
+      "security/Kconfig:186: warning: style: quotes recommended around 'security/smack/Kconfig' in 'source security/smack/Kconfig'",
+      "security/Kconfig:187: warning: style: quotes recommended around 'security/tomoyo/Kconfig' in 'source security/tomoyo/Kconfig'",
+      "security/Kconfig:188: warning: style: quotes recommended around 'security/apparmor/Kconfig' in 'source security/apparmor/Kconfig'",
+      "security/Kconfig:189: warning: style: quotes recommended around 'security/yama/Kconfig' in 'source security/yama/Kconfig'",
+      "security/Kconfig:191: warning: style: quotes recommended around 'security/integrity/Kconfig' in 'source security/integrity/Kconfig'",
+      "warning: INTEGRITY_AUDIT (defined at security/integrity/Kconfig:44) has leading or trailing whitespace in its prompt",
+      "security/integrity/Kconfig:59: warning: style: quotes recommended around 'security/integrity/ima/Kconfig' in 'source security/integrity/ima/Kconfig'",
+      "security/integrity/Kconfig:60: warning: style: quotes recommended around 'security/integrity/evm/Kconfig' in 'source security/integrity/evm/Kconfig'",
+      "drivers/crypto/Kconfig:223: warning: style: quotes recommended around 'drivers/crypto/caam/Kconfig' in 'source drivers/crypto/caam/Kconfig'",
+      "drivers/crypto/Kconfig:560: warning: style: quotes recommended around 'drivers/crypto/msm/Kconfig' in 'source drivers/crypto/msm/Kconfig'",
+      "crypto/Kconfig:1673: warning: style: quotes recommended around 'crypto/asymmetric_keys/Kconfig' in 'source crypto/asymmetric_keys/Kconfig'",
+      "crypto/Kconfig:1674: warning: style: quotes recommended around 'certs/Kconfig' in 'source certs/Kconfig'",
+      "warning: the choice symbol VIRT_CPU_ACCOUNTING_GEN (defined at init/Kconfig:374) is selected by the following symbols, but select/imply has no effect on choice symbols\n - NO_HZ_FULL (defined at kernel/time/Kconfig:89)",
+      "warning: the default selection CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE (undefined) of <choice> (defined at init/Kconfig:1458) is not contained in the choice",
+      "warning: the choice symbol FB_LITTLE_ENDIAN (defined at drivers/video/fbdev/Kconfig:156) is selected by the following symbols, but select/imply has no effect on choice symbols\n - FB_MB862XX_LIME (defined at drivers/video/fbdev/Kconfig:2284)"
+    ]
   },
   "source_checks": {
     "axion_manifest_android_16": true,
@@ -420,8 +493,11 @@
     "selected_kernel_queues_complete": true,
     "kconfig_bpf_dependencies": true,
     "kernel_author_messages_and_signatures_verified": true,
+    "provenance_matches_current_kernel": true,
+    "review_matches_current_sources": true,
+    "opencode_followup_contracts": true,
     "bpf_feature_version_property": true,
-    "single_signing_certificate_directory": true
+    "signing_keys_loaded_by_platform_only": true
   },
   "format_audit": {
     "git_diff_check_findings": 639,
@@ -430,8 +506,8 @@
     "note": "Upstream formatting retained. One RST heading triggers the conflict-marker heuristic; it is an Example underline, not an unresolved merge."
   },
   "workflow": {
-    "script_sha256": "de7be205a323da6764fbfe798f341e59e3a2eae4f4d052d677c403fe10527711",
-    "script_checked_commit": "e6e0231",
+    "script_sha256": "4b45835f74d685f78dae37e81da0c421ba91e1c17f9f98a1901661830e8734b3",
+    "script_checked_commit": "e1e0a4740a20f25ce863f7667d8df0555ba5e3e3",
     "current_script_identical": true,
     "bash_syntax": "PASS",
     "offline_scenarios": {
@@ -446,7 +522,7 @@
       "empty-artifact": "PASS",
       "upload-failure": "PASS"
     },
-    "validation": "Previously executed offline mock suite, including inherited GApps settings overridden by vanilla and preservation of signing key files. Documentation-only commits followed.",
+    "validation": "Offline mock suite rerun after OpenCode added device/axion/common to the checkout removal list. Ten scenarios pass; real sync, build and upload tools are replaced by mocks.",
     "real_build_or_upload_run": false
   },
   "local_build_run": false,
@@ -470,5 +546,47 @@
     "rom_build_run": false,
     "compiler_invoked": false,
     "ci_invoked": false
+  },
+  "opencode_review": {
+    "scope": "Source contracts, mechanical diffs and XML/permission review. No compiler, policy compiler, build, CI, ADB or runtime test.",
+    "kernel_commit": "59588a8e31a9bc8488cf30cedad153919fbd6f4e",
+    "device_commit": "2acde968f0da2192a664481a625be60cc7e6816d",
+    "checks": {
+      "slab_rename_mechanical": true,
+      "slab_flag_bit_unchanged": true,
+      "vmalloc_wrapper_keeps_node_flags_and_caller": true,
+      "kvmalloc_nofs_uses_only_kmalloc": true,
+      "kvmalloc_zero_flag_preserved": true,
+      "f2fs_duplicate_helpers_removed": true,
+      "cgroup_ancestor_level_check_and_parent_walk": true,
+      "ancestor_id_matches_current_kernfs_id_format": true,
+      "skb_ancestor_helper_matches_upstream": true,
+      "skb_ancestor_helper_registered": true,
+      "about_phone_metadata_before_axion_include": true,
+      "hardware_flags_before_axion_include": true,
+      "cpu_policies_and_core_ranges": true,
+      "gpu_reads_kernel_frequency_table_in_hz": true,
+      "all_and_only_eight_controls_owned_by_system": true,
+      "all_and_only_eight_controls_mode_0660": true,
+      "xml_uses_supported_loader_attributes": true,
+      "cpu_and_gpu_sysfs_attributes_exist_in_source": true,
+      "device_copy_rules_include_xml_and_init": true,
+      "axion_provides_cpu_write_policy": true,
+      "legacy_gpu_policy_types_declared": true
+    },
+    "unexpected_slab_deltas": [],
+    "remaining": [
+      "New commits require a server rebuild.",
+      "CPU/GPU sysfs labels, DAC ownership and writes require runtime verification.",
+      "AppArmor and XFRM_USER_COMPAT have dormant private kvmalloc names; this audit does not validate enabling additional kernel configurations.",
+      "BPF feature-version override is not proof of complete Linux 5.4 API coverage.",
+      "Boot, Wi-Fi cold/warm reboot, encryption and hardware still require device testing."
+    ],
+    "local_build_run": false
+  },
+  "new_diff_whitespace": {
+    "range": "39062a7758fab196d0dddc508510aab57f429625..59588a8e31a9bc8488cf30cedad153919fbd6f4e",
+    "result": "PASS",
+    "scope": "New review commits only; older upstream format findings remain recorded separately."
   }
 }

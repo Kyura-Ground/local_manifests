@@ -1,56 +1,61 @@
 # X00TD AxionOS A16 source references
 
 Candidate: AxionOS Android 16, vanilla, ASUS Linux 4.4.302-CIP115.
-The selected source backports and static checks are complete. A full ROM
-compilation has been attempted on ServerHive but currently stops in vendor
-sepolicy; assembled-image VINTF checks and device boot/runtime validation
-remain untested.
+The user reports compilation succeeded before the current review. The review
+added allocator/BPF fixes and device integration; these new commits require a
+server rebuild. No local compilation, CI, ADB, flash or runtime testing was run.
 
-`source-lock.json` records the ASUS source heads and inspected platform manifest.
-It is a source snapshot, not a revision-locked manifest for every Android project.
-`device-upstream-references.json` records device/common adaptations and source URLs.
+Read [opencode-review.md](opencode-review.md) for findings, commit mappings,
+README coverage, and limits. `opencode-review.json` records 21 passing source
+contract checks. Compilation success does not establish boot or API correctness.
 
-`kernel-cherry-picks.jsonl` maps upstream commits to local commits and describes
-manual adaptations. The kernel contains 1,531 new, locally signed commits; author,
-author date and upstream message bodies were verified. Defconfig device names
-were adapted in commit titles. Empty/already implemented changes are journaled
-without creating empty commits. The kernel remains based on the ASUS CIP115 tree;
-the Xiaomi device configuration and uname-spoof changes were not imported.
+`source-lock.json` records the ASUS source heads and the Axion common fork.
+It is a source snapshot, not a revision-locked manifest of the complete platform.
+The device metadata is for the user's confirmed 4 GB / 13+5 MP rear / 8 MP front
+X00TD variant. The SoC is Snapdragon 636 despite the shared sdm660 platform name.
 
-The kernel compile passed on ServerHive. The full ROM build then stopped in
-vendor sepolicy on the legacy-um `ax_diagnostics` rules: checkpolicy reported
-`unknown type vendor_sysfs_battery_supply`. The Axion common sepolicy fork at
-`Kyura-Ground/android_device_axion_common` commit `e80a73d4f4af` drops the
-vendor-prefixed duplicate rules that only exist on non-legacy QCOM devices.
-`local_manifest.xml` points `device/axion/common` at that fork. A rebuild and
-`Image.gz-dtb`/ROM zip are still pending; no local build was run.
+`kernel-cherry-picks.jsonl` records 1,533 upstream-derived commits and one local
+correction (1,534 signed new kernel commits). Upstream author, author date and
+message bodies were verified. Prefix/path adaptations and partial picks are
+explicitly recorded. Empty/already implemented changes are journaled separately.
+The ASUS CIP115 base, existing blobs and signing identity remain unchanged.
+
+Review follow-ups:
+
+- `83576aa45670`: Linux ce91f6ee5b3b, kvmalloc must not use vmalloc fallback
+  with GFP_NOFS or other incompatible flags.
+- `4e34303b063b`: local correction of the older msm8998-derived ancestor helper,
+  returning the same 64-bit kernfs ID format as the current-cgroup helper.
+- `59588a8e31a9`: complete Linux 7723628101aa skb ancestor helper and TC dispatch
+  omitted by the earlier cgroup header prerequisite pick.
+- Device `2acde968f0da`: Axion metadata and Kernel Manager XML/init permissions.
+
+The Axion common fork `e80a73d4f4af` correctly removes duplicate non-legacy
+QCOM sysfs type references while keeping the plain legacy types and the explicitly
+defined vendor_sysfs_kgsl_gpuclk. It remains selected by local_manifest.xml.
+
+`validation.json` includes current provenance, Kconfig, source comparison,
+workflow and follow-up review results. Of 54 compared BPF files, 49 match the
+msm8998 reference exactly. Five deliberate deltas are described: JIT blank lines,
+retained core allocator behavior, the corrected ancestor ID, completed skb helper,
+and its UAPI documentation. Header or source equality is not API/runtime proof.
 
 Kernel reference:
 [xiaomi-msm8998-devs/android_kernel_xiaomi_msm8998](https://github.com/xiaomi-msm8998-devs/android_kernel_xiaomi_msm8998/tree/lineage-23.2),
-snapshot `15e2687e40a47a7e6bb86dbf746a37c657b2092f`.
-Namespace prerequisites came from their original
-[Linux commits](https://github.com/torvalds/linux/commits/master/fs/nsfs.c).
+snapshot 15e2687e40a47a7e6bb86dbf746a37c657b2092f.
+Original Linux prerequisites and the GFP follow-up are linked in the journal;
+`additional-linux-history.json` preserves the latter's canonical metadata.
 
-`validation.json` records the checks and their limits. Of 54 compared BPF files,
-52 match the reference exactly. ARM64 JIT differs only by blank lines; core
-allocation differences retain the ASUS HIGHMEM flags and module allocator path
-with `MODULES=y` on ARM64. Kconfig was evaluated in Python with external commands
-blocked. No compiler, make, .config generation, CI, ADB or device modification
-was used for these checks. Workflow tests used mocked build/upload commands.
+HAL FCM is 6, kernel FCM is 5, and VINTF kernel enforcement is retained.
+ro.bpf.kver_override=5.4.299 uses Axion's existing feature-version mechanism;
+it does not prove complete Linux 5.4 API coverage. The actual kernel remains 4.4.
 
-The BPF property `ro.bpf.kver_override=5.4.299` selects the reviewed backported
-feature level through Axion's existing KernelUtils mechanism. The actual kernel
-version remains 4.4. HAL FCM is 6, kernel FCM is 5, and VINTF kernel enforcement
-is retained. Existing proprietary blobs and signing identity are preserved.
+The signing inheritance fix is documented in signing-inheritance-fix.json.
+Axion common.mk loads the user's existing keys.mk once; no gk -s or key generation
+was used. Optional AxionFx, HBM, bypass charging, doze extensions and custom
+performance hints were not enabled without device evidence. Power HAL remains
+active and Kernel Manager reads supported clocks from sysfs.
 
-Original upstream `Test:` lines in preserved commit messages describe upstream
-testing. They do not mean those tests were run on this port.
-
-The first server build exposed duplicated signing-certificate directories.
-The device-level keys.mk inheritance has been removed using upstream commit
-`f53b5f8de71d318783183455c1befc0fc3ebdf10`; Axion common.mk already includes it.
-`signing-inheritance-fix.json` records a focused evaluation using Axion's actual
-product/node macros: the duplicated Bluetooth certificate path becomes one
-directory, and the existing testkey identity path is preserved. This evaluation
-has no build recipes and invokes no compiler or Soong. Server compilation has
-not been rerun by the source audit.
+Original upstream Test lines describe upstream testing. New source needs a
+server rebuild and device checks for boot, BPF loading, VINTF, Wi-Fi across cold
+boot/reboot, encryption, camera/audio/modem and Kernel Manager in SELinux enforcing.

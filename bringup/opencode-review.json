@@ -1,0 +1,37 @@
+{
+  "scope": "Source contracts, mechanical diffs and XML/permission review. No compiler, policy compiler, build, CI, ADB or runtime test.",
+  "kernel_commit": "59588a8e31a9bc8488cf30cedad153919fbd6f4e",
+  "device_commit": "2acde968f0da2192a664481a625be60cc7e6816d",
+  "checks": {
+    "slab_rename_mechanical": true,
+    "slab_flag_bit_unchanged": true,
+    "vmalloc_wrapper_keeps_node_flags_and_caller": true,
+    "kvmalloc_nofs_uses_only_kmalloc": true,
+    "kvmalloc_zero_flag_preserved": true,
+    "f2fs_duplicate_helpers_removed": true,
+    "cgroup_ancestor_level_check_and_parent_walk": true,
+    "ancestor_id_matches_current_kernfs_id_format": true,
+    "skb_ancestor_helper_matches_upstream": true,
+    "skb_ancestor_helper_registered": true,
+    "about_phone_metadata_before_axion_include": true,
+    "hardware_flags_before_axion_include": true,
+    "cpu_policies_and_core_ranges": true,
+    "gpu_reads_kernel_frequency_table_in_hz": true,
+    "all_and_only_eight_controls_owned_by_system": true,
+    "all_and_only_eight_controls_mode_0660": true,
+    "xml_uses_supported_loader_attributes": true,
+    "cpu_and_gpu_sysfs_attributes_exist_in_source": true,
+    "device_copy_rules_include_xml_and_init": true,
+    "axion_provides_cpu_write_policy": true,
+    "legacy_gpu_policy_types_declared": true
+  },
+  "unexpected_slab_deltas": [],
+  "remaining": [
+    "New commits require a server rebuild.",
+    "CPU/GPU sysfs labels, DAC ownership and writes require runtime verification.",
+    "AppArmor and XFRM_USER_COMPAT have dormant private kvmalloc names; this audit does not validate enabling additional kernel configurations.",
+    "BPF feature-version override is not proof of complete Linux 5.4 API coverage.",
+    "Boot, Wi-Fi cold/warm reboot, encryption and hardware still require device testing."
+  ],
+  "local_build_run": false
+}

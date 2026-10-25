@@ -3,7 +3,8 @@
     "repository": "https://github.com/AxionAOSP/android",
     "branch": "lineage-23.2",
     "inspected_manifest_commit": "8fb9091f8b6eb4d76a88b0763d1c0e429e6c7198",
-    "aosp_revision": "android-16.0.0_r4"
+    "aosp_revision": "android-16.0.0_r4",
+    "reviewed_readme_blob": "085c32809e4da6a42c25809f5d7a7ca25e83f6e4"
   },
   "variant": "vanilla",
   "kernel": "4.4.302-CIP115",
@@ -12,7 +13,7 @@
       "path": "device/asus/X00TD",
       "repository": "https://github.com/Kyura-Ground/android_device_asus_X00TD-4.4",
       "branch": "axion-23.2-4.4",
-      "commit": "97d7be464ffab06729a12d13019e9c0d506cdc39",
+      "commit": "2acde968f0da2192a664481a625be60cc7e6816d",
       "a15_baseline": "d7c20db78608d5bb5ee1729928e0c731ae242cfb"
     },
     {
@@ -40,9 +41,16 @@
       "path": "kernel/asus/sdm660",
       "repository": "https://github.com/Kyura-Ground/android_kernel_asus_sdm660",
       "branch": "axion-23.2-4.4",
-      "commit": "39062a7758fab196d0dddc508510aab57f429625",
+      "commit": "59588a8e31a9bc8488cf30cedad153919fbd6f4e",
       "a15_baseline": "613a72fe7e5c78881bdaffda8bcfaf46cff6531c"
+    },
+    {
+      "path": "device/axion/common",
+      "repository": "https://github.com/Kyura-Ground/android_device_axion_common",
+      "branch": "axion-23.2-4.4",
+      "commit": "e80a73d4f4aff087fc92be0247a4849949d7863e",
+      "upstream_base": "f0289ea527e34c9bb37dd7b462d23423d4962216"
     }
   ],
-  "limit": "ASUS project commit snapshot, not a revision-locked manifest for the complete Android platform."
+  "limit": "Source snapshot of ASUS projects and the Axion common fork, not a revision-locked manifest of the complete Android platform."
 }

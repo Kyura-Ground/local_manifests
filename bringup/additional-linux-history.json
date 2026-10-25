@@ -1,0 +1,31 @@
+[
+  {
+    "sha": "ce91f6ee5b3bbbad8caff61b1c46d845c8db19bf",
+    "commit": {
+      "author": {
+        "name": "Michal Hocko",
+        "email": "mhocko@suse.com",
+        "date": "2018-06-08T00:09:40Z"
+      },
+      "committer": {
+        "name": "Linus Torvalds",
+        "email": "torvalds@linux-foundation.org",
+        "date": "2018-06-08T00:34:38Z"
+      },
+      "message": "mm: kvmalloc does not fallback to vmalloc for incompatible gfp flags\n\nkvmalloc warned about incompatible gfp_mask to catch abusers (mostly\nGFP_NOFS) with an intention that this will motivate authors of the code\nto fix those.  Linus argues that this just motivates people to do even\nmore hacks like\n\n\tif (gfp == GFP_KERNEL)\n\t\tkvmalloc\n\telse\n\t\tkmalloc\n\nI haven't seen this happening much (Linus pointed to bucket_lock special\ncases an atomic allocation but my git foo hasn't found much more) but it\nis true that we can grow those in future.  Therefore Linus suggested to\nsimply not fallback to vmalloc for incompatible gfp flags and rather\nstick with the kmalloc path.\n\nLink: http://lkml.kernel.org/r/20180601115329.27807-1-mhocko@kernel.org\nSigned-off-by: Michal Hocko <mhocko@suse.com>\nSuggested-by: Linus Torvalds <torvalds@linux-foundation.org>\nCc: Tom Herbert <tom@quantonium.net>\nSigned-off-by: Andrew Morton <akpm@linux-foundation.org>\nSigned-off-by: Linus Torvalds <torvalds@linux-foundation.org>",
+      "tree": {
+        "sha": "6b15942c9c8f673dc94a9dbc824e778f2ef8ff2a",
+        "url": "https://api.github.com/repos/torvalds/linux/git/trees/6b15942c9c8f673dc94a9dbc824e778f2ef8ff2a"
+      },
+      "url": "https://api.github.com/repos/torvalds/linux/git/commits/ce91f6ee5b3bbbad8caff61b1c46d845c8db19bf",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    }
+  }
+]

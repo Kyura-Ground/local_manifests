@@ -58,11 +58,11 @@
     ],
     "evidence": [
       "Completed selected BPF backport queues",
-      "52/54 compared source files exact; ARM64 JIT differs only blank lines; core allocation deltas reviewed for ARM64 with MODULES=y",
+      "49/54 compared source files exact after deliberate ancestor ID/helper corrections; five reviewed deltas documented in validation.json",
       "BPF/JIT/stream-parser dependencies enabled via read-only Kconfig evaluation",
       "Axion KernelUtils.h reads ro.bpf.kver_override"
     ],
-    "validation_limit": "Source audit only. Original upstream Test line is retained metadata, not a test run on this port. No ROM build or device test performed."
+    "validation_limit": "Source review only. The feature-version override does not prove full Linux 5.4 API coverage. New follow-ups require a server rebuild and BPF runtime tests."
   },
   "own_changes": {
     "X00TD Axion product flag": "https://github.com/AxionAOSP/android/blob/lineage-23.2/README.mkdn",
@@ -82,5 +82,16 @@
     "validation": "Focused Axion product/node macro evaluation reproduced duplicate before and one directory after; signing identity path and keys.mk hash unchanged. No ROM compilation or CI.",
     "related_issue_commit": "https://github.com/Transsion-G81/android_device_infinix_X6532/commit/fd1c689d35af07d72052776051ce6927cfdc9630",
     "related_issue_scope": "Confirms the same MainlineSepolicyDevCertificates duplicate-path failure, but its unrelated MediaTek sensor shim changes were not applied."
+  },
+  "axion-readme-integration": {
+    "local_commit": "2acde968f0da2192a664481a625be60cc7e6816d",
+    "implementation": "Device-specific configuration; no exact X00TD integration commit found.",
+    "references": [
+      "https://github.com/AxionAOSP/android/blob/lineage-23.2/README.mkdn",
+      "https://github.com/AxionAOSP/android_device_axion_common/blob/lineage-23.2/prebuilts/ax_kernel_manager_lavender.xml",
+      "https://github.com/AxionAOSP-devices/android_device_motorola_mumba/commit/cbcb512dd8b2a51a8b255884ac584cd8070e1a30"
+    ],
+    "variant": "User confirmed X00TD RAM 4 GB, rear 13+5 MP, front 8 MP.",
+    "validation": "21 source-contract checks; XML and init permissions matched to X00TD drivers and Axion loader. No local compilation or runtime write test."
   }
 }

@@ -3,14 +3,11 @@
 This manifest is for the Linux **4.4** bringup. It is separate from the existing
 `lineage-23.2` local-manifest branch that names Linux 4.19 trees.
 
-This is a candidate for the first server build. The selected upstream kernel
-backports and static source checks are complete; ROM compilation and device
-boot have not been validated. All referenced source branches must be available
-on `axion-23.2-4.4` before syncing.
-
-The kernel build passes; the full ROM build currently stops in vendor
-sepolicy on the legacy-um `ax_diagnostics` rules. The
-`device/axion/common` override below fixes that and is pending a rebuild.
+The user reports compilation succeeded before the current source review.
+That review found allocator and BPF cgroup issues, fixed them, and completed
+the Axion device metadata and Kernel Manager setup. These new commits require
+a server rebuild; boot and hardware behavior have not been validated here.
+See the [detailed review](bringup/opencode-review.md) for findings and limits.
 
 ```bash
 repo init -u https://github.com/AxionAOSP/android.git -b lineage-23.2 --git-lfs
