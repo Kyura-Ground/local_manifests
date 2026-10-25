@@ -1,0 +1,48 @@
+{
+  "platform": {
+    "repository": "https://github.com/AxionAOSP/android",
+    "branch": "lineage-23.2",
+    "inspected_manifest_commit": "8fb9091f8b6eb4d76a88b0763d1c0e429e6c7198",
+    "aosp_revision": "android-16.0.0_r4"
+  },
+  "variant": "vanilla",
+  "kernel": "4.4.302-CIP115",
+  "projects": [
+    {
+      "path": "device/asus/X00TD",
+      "repository": "https://github.com/Kyura-Ground/android_device_asus_X00TD-4.4",
+      "branch": "axion-23.2-4.4",
+      "commit": "97d7be464ffab06729a12d13019e9c0d506cdc39",
+      "a15_baseline": "d7c20db78608d5bb5ee1729928e0c731ae242cfb"
+    },
+    {
+      "path": "device/asus/sdm660-common",
+      "repository": "https://github.com/Kyura-Ground/android_device_asus_sdm660-common-4.4",
+      "branch": "axion-23.2-4.4",
+      "commit": "c31c0903a77bb5bb6e0b1fac1ffad0191044856f",
+      "a15_baseline": "9bd9b0474f48cfb15712e0287ff64143830acc4f"
+    },
+    {
+      "path": "vendor/asus/X00TD",
+      "repository": "https://github.com/Kyura-Ground/proprietary_vendor_asus_X00TD-4.4",
+      "branch": "axion-23.2-4.4",
+      "commit": "6dc8aef5ec3f760fd1467646f7e4a0e44635c918",
+      "a15_baseline": "6dc8aef5ec3f760fd1467646f7e4a0e44635c918"
+    },
+    {
+      "path": "vendor/asus/sdm660-common",
+      "repository": "https://github.com/Kyura-Ground/proprietary_vendor_asus_sdm660-common-4.4",
+      "branch": "axion-23.2-4.4",
+      "commit": "db305474c111fdc3007cf7c679babc540ef00f04",
+      "a15_baseline": "db305474c111fdc3007cf7c679babc540ef00f04"
+    },
+    {
+      "path": "kernel/asus/sdm660",
+      "repository": "https://github.com/Kyura-Ground/android_kernel_asus_sdm660",
+      "branch": "axion-23.2-4.4",
+      "commit": "5300fb19f36c3b876089ac1f3c367cff4332c5b5",
+      "a15_baseline": "613a72fe7e5c78881bdaffda8bcfaf46cff6531c"
+    }
+  ],
+  "limit": "ASUS project commit snapshot, not a revision-locked manifest for the complete Android platform."
+}

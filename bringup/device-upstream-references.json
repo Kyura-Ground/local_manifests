@@ -1,0 +1,71 @@
+{
+  "fcm6-reference": {
+    "repo": "device/asus/sdm660-common",
+    "upstream": "438f88c7703776d94e97de55d3dfba29af066642",
+    "local_commit": "019ecd83383d8ba629a35366fa9edc4edec4d275",
+    "adaptation": "Keep ASUS XML comment and HAL declarations, apply target-level 5->6, adapt only device prefix."
+  },
+  "matrix-inclusion-reference": {
+    "upstream": "1c90516acb1a49ff3621d10f750ba65a037694dc",
+    "local_commit": "ebeaa152df854cffcdab663d941ebcb3e87198b4",
+    "reason": "Axion vendor/lineage 23.2 has no device_framework_matrix.xml. Preserve ASUS/QTI matrices and use upstream += semantics."
+  },
+  "ant-upstream-reference": {
+    "upstream": "92d6e5f457314077cd7a0dc0a54bea7ccaea4381",
+    "local_commit": "59b75b229c46913d6467a168102ac301f8f379f4",
+    "adaptation": "Map msm8998.mk to sdm660.mk; remove obsolete app and board selector, preserve com.dsi.ant HIDL library and proprietary HAL."
+  },
+  "kernel-fcm-reference": {
+    "upstream": "f2b58971edc65d14b30918ff59f6e77049f6ef3c",
+    "local": "1167a0c34ff26068f9f0af0d7abaeb4a9e62cf2f",
+    "adaptation": "Only device prefix adapted. Keep HAL FCM 6, explicitly use kernel FCM 5 with p_4.4 requirements from Axion matrix 5. PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS remains true.",
+    "source": "https://github.com/xiaomi-msm8998-devs/android_device_xiaomi_msm8998-common/commit/f2b58971edc65d14b30918ff59f6e77049f6ef3c"
+  },
+  "livedisplay-upstream-reference": {
+    "upstream": "38208444bb38d1b52fc5ade2709e09be3f942951",
+    "local": "0b59faf50db93110f063aef8c7627712aa089d5f",
+    "adaptations": [
+      "msm8998.mk -> sdm660.mk",
+      "Remove existing ASUS HIDL block, which declares IPictureAdjustment only",
+      "Device prefix in title only"
+    ],
+    "follow_up_reference": "cb38a026651ded9bb0485416e0e7e1cd25a4ab57",
+    "follow_up_limit": "Xiaomi panel explanation does not apply to ASUS; keep ASUS exposed interface set explicitly in separate local change."
+  },
+  "tetheroffload-upstream-reference": {
+    "upstream": "eb33d71461d34b21f78ec6b96b42544f4b056438",
+    "local": "61091dc9f617795420b7e46da4c7ceb814d90bcc",
+    "evidence": [
+      "FCM 6 declares control HAL 1.1",
+      "Axion manifest uses data-ipa-cfg-mgr lineage-23.2-legacy-um",
+      "HAL.h includes control/1.1/IOffloadControl.h and selects V1_1::IOffloadControl",
+      "HAL.cpp registers IOffloadControl::registerAsService()"
+    ],
+    "adaptation": "Device prefix only"
+  },
+  "bpf-override-reference": {
+    "changes": [
+      {
+        "upstream": "daa55cb98f0c8304da97704056a9c5e5c02b2ccb",
+        "local": "90612fface170d5813dcbf4d30a95f1addde3b0e",
+        "adaptation": "Device prefix and insertion position only; preserve existing ASUS product properties and LF line endings."
+      },
+      {
+        "upstream": "c144dd88cdced0df40dd5a6884c1554660113d19",
+        "local": "c31c0903a77bb5bb6e0b1fac1ffad0191044856f",
+        "adaptation": "Device prefix and insertion position only; preserve existing ASUS product properties and LF line endings."
+      }
+    ],
+    "evidence": [
+      "Completed selected BPF backport queues",
+      "52/54 compared source files exact; ARM64 JIT differs only blank lines; core allocation deltas reviewed for ARM64 with MODULES=y",
+      "BPF/JIT/stream-parser dependencies enabled via read-only Kconfig evaluation",
+      "Axion KernelUtils.h reads ro.bpf.kver_override"
+    ],
+    "validation_limit": "Source audit only. Original upstream Test line is retained metadata, not a test run on this port. No ROM build or device test performed."
+  },
+  "own_changes": {
+    "X00TD Axion product flag": "https://github.com/AxionAOSP/android/blob/lineage-23.2/README.mkdn",
+    "LiveDisplay display-modes disabled": "Preserve the ASUS manifest interface set (picture adjustment only); Xiaomi cb38a026 panel-specific explanation does not apply to ASUS."
+  }
+}

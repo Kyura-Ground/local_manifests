@@ -1,0 +1,445 @@
+{
+  "scope": "Source-only candidate for the first server build. No ROM compilation, CI or device boot validation performed.",
+  "kernel_provenance": {
+    "kernel_commit": "5300fb19f36c3b876089ac1f3c367cff4332c5b5",
+    "upstream_metadata_checked": 1526,
+    "metadata_failures": [],
+    "title_adaptations": [
+      {
+        "upstream": "9ce9edd2746230fa9bdc1603a9221475e6de21d9",
+        "title": "ARM64: defconfig: X00TD: enable CONFIG_MEMBARRIER",
+        "adaptation": "Map upstream defconfig and prefix to X00TD; preserve X01BD unchanged."
+      },
+      {
+        "upstream": "ae57b4f60d681a6ea7c6ae8b7f0220fcffd5b804",
+        "title": "X00TD_defconfig: Enable BPF_JIT_ALWAYS_ON",
+        "adaptation": "Map identical chiron/sagit BPF_JIT_ALWAYS_ON additions to the existing X00TD defconfig."
+      },
+      {
+        "upstream": "8c73758e568d0a7d7b1d90f50ef715278679f956",
+        "title": "ARM64: defconfig: X00TD: Regen defconfig for bpf backport",
+        "adaptation": "Map BPF_STREAM_PARSER=y and explicit TLS disable to X00TD; omit unrelated SLUB line reordering from the Xiaomi defconfig."
+      }
+    ],
+    "local_signed_commits": 1526,
+    "invalid_signatures": [],
+    "commits_not_in_journal": [],
+    "no_compilation_performed": true
+  },
+  "bpf_source_comparison": {
+    "reference": "15e2687e40a47a7e6bb86dbf746a37c657b2092f",
+    "kernel_commit": "5300fb19f36c3b876089ac1f3c367cff4332c5b5",
+    "scope": "BPF source, shared headers, ARM64 JIT, parser and network integrations; string/line comparisons, not a compiler or runtime test.",
+    "files": [
+      {
+        "path": "arch/arm64/net/bpf_jit_comp.c",
+        "exact": false,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "include/linux/bpf-cgroup.h",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "include/linux/bpf.h",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "include/linux/bpf_trace.h",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "include/linux/bpf_types.h",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "include/linux/bpf_verifier.h",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "include/linux/btf.h",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "include/linux/filter.h",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "include/linux/skmsg.h",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "include/uapi/linux/bpf.h",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "include/uapi/linux/bpf_common.h",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "include/uapi/linux/btf.h",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/Makefile",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/arraymap.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/bpf_lru_list.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/bpf_lru_list.h",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/btf.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/cgroup.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/core.c",
+        "exact": false,
+        "same_nonblank_stripped_lines": false,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/cpumap.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/devmap.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/disasm.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/disasm.h",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/hashtab.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/helpers.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/inode.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/local_storage.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/lpm_trie.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/map_in_map.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/map_in_map.h",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/offload.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/percpu_freelist.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/percpu_freelist.h",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/queue_stack_maps.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/reuseport_array.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/ringbuf.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/stackmap.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/syscall.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/sysfs_btf.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/tnum.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/bpf/verifier.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "net/bpf/Makefile",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "net/bpf/test_run.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "net/strparser/Kconfig",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "net/strparser/Makefile",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "net/strparser/strparser.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "kernel/trace/bpf_trace.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "net/core/filter.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "net/core/flow_dissector.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "net/core/sock_map.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "net/core/skmsg.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "net/core/sock_reuseport.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "net/ipv4/tcp_bpf.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      },
+      {
+        "path": "net/ipv4/tcp_ulp.c",
+        "exact": true,
+        "same_nonblank_stripped_lines": true,
+        "present": true
+      }
+    ],
+    "reviewed_differences": {
+      "arch/arm64/net/bpf_jit_comp.c": "Two additional blank lines only.",
+      "kernel/bpf/core.c": "Retain baseline __GFP_HIGHMEM flags in vmalloc allocation. ARM64 has no HIGHMEM zone. Generic JIT helpers retain module allocator calls; X00TD evaluates MODULES=y, which selects the same reference allocator path. ARM64 supplies its own JIT allocator."
+    },
+    "configuration_evidence": "kernel-kconfig-audit.json"
+  },
+  "kconfig": {
+    "checks": {
+      "bpf_and_dependency_flags_enabled": true,
+      "tls_not_enabled_by_new_default": true,
+      "reviewed_module_allocator_configuration": true
+    },
+    "values": {
+      "BPF": "y",
+      "BPF_SYSCALL": "y",
+      "CGROUP_BPF": "y",
+      "BPF_JIT": "y",
+      "BPF_JIT_ALWAYS_ON": "y",
+      "HAVE_EBPF_JIT": "y",
+      "BPF_EVENTS": "y",
+      "BPF_STREAM_PARSER": "y",
+      "NET_SOCK_MSG": "y",
+      "STREAM_PARSER": "y",
+      "PERF_EVENTS": "y",
+      "KPROBE_EVENT": "y",
+      "NET_CLS_BPF": "y",
+      "NET_ACT_BPF": "y",
+      "NET_SCH_INGRESS": "y",
+      "MEMBARRIER": "y",
+      "IPV6": "y",
+      "NAMESPACES": "y",
+      "INET": "y",
+      "CFI_CLANG": null,
+      "TLS": "n",
+      "MODULES": "y",
+      "HIGHMEM": null
+    },
+    "warning_count": 51,
+    "warning_scope": "Existing Kconfig style/choice warnings; not C compiler diagnostics."
+  },
+  "source_checks": {
+    "axion_manifest_android_16": true,
+    "axion_legacy_kernel_flag": true,
+    "axion_vanilla_workflow": true,
+    "hal_fcm_6": true,
+    "kernel_fcm_5": true,
+    "kernel_vintf_enforcement_retained": true,
+    "kernel_version_4_4": true,
+    "all_50_direct_platform_inputs_exist": true,
+    "a15_primary_checkouts_preserved": true,
+    "vendor_blobs_unchanged": true,
+    "source_worktrees_clean": true,
+    "selected_kernel_queues_complete": true,
+    "kconfig_bpf_dependencies": true,
+    "kernel_author_messages_and_signatures_verified": true,
+    "bpf_feature_version_property": true
+  },
+  "format_audit": {
+    "git_diff_check_findings": 639,
+    "all_from_reviewed_upstream": true,
+    "source_conflict_markers": [],
+    "note": "Upstream formatting retained. One RST heading triggers the conflict-marker heuristic; it is an Example underline, not an unresolved merge."
+  },
+  "workflow": {
+    "script_sha256": "de7be205a323da6764fbfe798f341e59e3a2eae4f4d052d677c403fe10527711",
+    "script_checked_commit": "e6e0231",
+    "current_script_identical": true,
+    "bash_syntax": "PASS",
+    "offline_scenarios": {
+      "ksu": "PASS",
+      "axion-wildcard": "PASS",
+      "sync-failure": "PASS",
+      "ksu-setup-failure": "PASS",
+      "env-failure": "PASS",
+      "lunch-failure": "PASS",
+      "build-failure": "PASS",
+      "no-artifact": "PASS",
+      "empty-artifact": "PASS",
+      "upload-failure": "PASS"
+    },
+    "validation": "Previously executed offline mock suite, including inherited GApps settings overridden by vanilla and preservation of signing key files. Documentation-only commits followed.",
+    "real_build_or_upload_run": false
+  },
+  "local_build_run": false,
+  "ci_invoked": false,
+  "phone_modified": false
+}

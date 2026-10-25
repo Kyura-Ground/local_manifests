@@ -18,4 +18,7 @@ The five ASUS projects use the 4.4 repositories and `axion-23.2-4.4` branches.
 The shared signing-key project stays on the existing `lineage-24.0` branch.
 The requested ROM variant is vanilla without GApps.
 
+The [bringup records](bringup/README.md) contain upstream commit mappings,
+ASUS source hashes and the scope of static validation.
+
 Reference: [AxionOS A16 manifest](https://github.com/AxionAOSP/android/tree/lineage-23.2).
