@@ -411,7 +411,8 @@
     "selected_kernel_queues_complete": true,
     "kconfig_bpf_dependencies": true,
     "kernel_author_messages_and_signatures_verified": true,
-    "bpf_feature_version_property": true
+    "bpf_feature_version_property": true,
+    "single_signing_certificate_directory": true
   },
   "format_audit": {
     "git_diff_check_findings": 639,
@@ -441,5 +442,24 @@
   },
   "local_build_run": false,
   "ci_invoked": false,
-  "phone_modified": false
+  "phone_modified": false,
+  "signing_inheritance": {
+    "scope": "Evaluate signing inheritance with Axion's actual product/node Make macros.\n\nNo build recipes, compiler, Soong, CI, key generation, or Android output tree.\nUnrelated product settings are omitted from this focused reproduction.\n",
+    "results": {
+      "before": {
+        "CERT": "vendor/lineage-priv/keys/testkey",
+        "BLUETOOTH": "vendor/lineage-priv/keys/ vendor/lineage-priv/keys/"
+      },
+      "after": {
+        "CERT": "vendor/lineage-priv/keys/testkey",
+        "BLUETOOTH": "vendor/lineage-priv/keys/"
+      }
+    },
+    "keys_mk_sha256": "a8e92bdf7b6de17cf519e2e3d16aa13756c52585a4adc39bb7735c5478ef9ad3",
+    "signing_identity_path_preserved": true,
+    "keys_configuration_unchanged": true,
+    "rom_build_run": false,
+    "compiler_invoked": false,
+    "ci_invoked": false
+  }
 }

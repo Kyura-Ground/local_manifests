@@ -67,5 +67,20 @@
   "own_changes": {
     "X00TD Axion product flag": "https://github.com/AxionAOSP/android/blob/lineage-23.2/README.mkdn",
     "LiveDisplay display-modes disabled": "Preserve the ASUS manifest interface set (picture adjustment only); Xiaomi cb38a026 panel-specific explanation does not apply to ASUS."
+  },
+  "signing-inheritance-fix": {
+    "upstream_repository": "https://github.com/XTENSEI/android_device_infinix_X6711",
+    "upstream_commit": "f53b5f8de71d318783183455c1befc0fc3ebdf10",
+    "local_commit": "513d4aabb9eff14f3d0d431d2efced6974527720",
+    "branch": "axion-23.2-4.4",
+    "adaptations": [
+      "device.mk -> sdm660.mk",
+      "Remove existing optional inherit-product-if-exists form of the same redundant signing-key import",
+      "Adapt only device prefix in subject; preserve original author, author date and message body"
+    ],
+    "root_cause": "Axion common.mk directly includes keys.mk. Additional device inheritance expands PRODUCT_MAINLINE_BLUETOOTH_SEPOLICY_DEV_CERTIFICATES twice; soong_config exports the result as one string path.",
+    "validation": "Focused Axion product/node macro evaluation reproduced duplicate before and one directory after; signing identity path and keys.mk hash unchanged. No ROM compilation or CI.",
+    "related_issue_commit": "https://github.com/Transsion-G81/android_device_infinix_X6532/commit/fd1c689d35af07d72052776051ce6927cfdc9630",
+    "related_issue_scope": "Confirms the same MainlineSepolicyDevCertificates duplicate-path failure, but its unrelated MediaTek sensor shim changes were not applied."
   }
 }

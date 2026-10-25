@@ -35,3 +35,12 @@ is retained. Existing proprietary blobs and signing identity are preserved.
 
 Original upstream `Test:` lines in preserved commit messages describe upstream
 testing. They do not mean those tests were run on this port.
+
+The first server build exposed duplicated signing-certificate directories.
+The device-level keys.mk inheritance has been removed using upstream commit
+`f53b5f8de71d318783183455c1befc0fc3ebdf10`; Axion common.mk already includes it.
+`signing-inheritance-fix.json` records a focused evaluation using Axion's actual
+product/node macros: the duplicated Bluetooth certificate path becomes one
+directory, and the existing testkey identity path is preserved. This evaluation
+has no build recipes and invokes no compiler or Soong. Server compilation has
+not been rerun by the source audit.
