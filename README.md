@@ -3,8 +3,10 @@
 This manifest is for the Linux **4.4** bringup. It is separate from the existing
 `lineage-23.2` local-manifest branch that names Linux 4.19 trees.
 
-The bringup is still being reviewed. Publish all referenced `axion-23.2-4.4`
-source branches before using this manifest on a build server.
+This is a candidate for the first server build. The selected upstream kernel
+backports and static source checks are complete; ROM compilation and device
+boot have not been validated. All referenced source branches must be available
+on `axion-23.2-4.4` before syncing.
 
 ```bash
 repo init -u https://github.com/AxionAOSP/android.git -b lineage-23.2 --git-lfs
