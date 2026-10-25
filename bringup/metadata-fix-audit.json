@@ -14,7 +14,8 @@
     "a15_primary_checkout_preserved": true,
     "RANGING_permission_registered_after_boot": true,
     "metadata_tmpfs_observed_after_boot": true,
-    "no_crash_buffer_entries_after_boot": true
+    "no_crash_buffer_entries_after_boot": true,
+    "metadata_source_paths_unchanged_at_reviewed_head": true
   },
   "common_new_signed_commits": 11,
   "user_report": "Setup/home screen reached after live metadata hotfix.",
@@ -32,5 +33,6 @@
     "previous_system_server_fatal_matches": 0,
     "crash_logcat_capture": "successful; buffer empty",
     "hardware_and_repeat_reboot_tests": "pending"
-  }
+  },
+  "reviewed_common_commit": "e1f6c62c52a92b1bb1efe0248e0616c70195f01b"
 }
