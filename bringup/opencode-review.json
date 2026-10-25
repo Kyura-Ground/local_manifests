@@ -1,6 +1,6 @@
 {
   "scope": "Source contracts, mechanical diffs and XML/permission review. No compiler, policy compiler, build, CI, ADB or runtime test.",
-  "kernel_commit": "630e76d696e709c551f5666bc2b20e90b53dcb11",
+  "kernel_commit": "51750c3aeac1dbd26941f44f12c6064041242cb7",
   "device_commit": "2acde968f0da2192a664481a625be60cc7e6816d",
   "checks": {
     "slab_rename_mechanical": true,

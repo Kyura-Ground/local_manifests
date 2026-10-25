@@ -1,8 +1,8 @@
 {
-  "scope": "Source candidate after flash/recovery failure diagnosis. ADB read-only logs show A16 arc4random abort on missing WIPEONFORK; new source requires server rebuild and runtime validation. No local compilation or device image writes.",
+  "scope": "Source candidate after pstore-confirmed A16 recovery SELinux failure. Kernel #4 passed arc4random then aborted in obsolete M avtab compatibility decoding. Read-only analysis confirms 100 modern NLMSG xperm rules. Fix 51750c3aeac1 requires a server kernel/boot/recovery rebuild and runtime validation. No local compilation or CI.",
   "kernel_provenance": {
-    "kernel_commit": "630e76d696e709c551f5666bc2b20e90b53dcb11",
-    "upstream_metadata_checked": 1535,
+    "kernel_commit": "51750c3aeac1dbd26941f44f12c6064041242cb7",
+    "upstream_metadata_checked": 1536,
     "metadata_failures": [],
     "local_fixes": [
       {
@@ -33,20 +33,20 @@
         "adaptation": "Map BPF_STREAM_PARSER=y and explicit TLS disable to X00TD; omit unrelated SLUB line reordering from the Xiaomi defconfig."
       }
     ],
-    "local_signed_commits": 1536,
+    "local_signed_commits": 1537,
     "invalid_signatures": [],
     "commits_not_in_journal": [],
     "no_compilation_performed": true,
     "build_progress": {
-      "last_observed": "Axion updater SIGABRT/MADV_WIPEONFORK after successful signature verification; prior A16 recovery boot panics at init on same error.",
-      "fix_head": "630e76d696e709c551f5666bc2b20e90b53dcb11",
-      "rebuild_status": "pending server rebuild of kernel/boot/recovery/ZIP",
+      "last_observed": "User rebuilt kernel #4; pstore reaches SELinux then invalid avtab type/class / InitFatalReboot signal 6. Old working recovery restored by user.",
+      "fix_head": "51750c3aeac1dbd26941f44f12c6064041242cb7",
+      "rebuild_status": "pending server rebuild of boot/recovery with SELinux decoder fix",
       "local_build_run": false
     }
   },
   "bpf_source_comparison": {
     "reference": "15e2687e40a47a7e6bb86dbf746a37c657b2092f",
-    "kernel_commit": "630e76d696e709c551f5666bc2b20e90b53dcb11",
+    "kernel_commit": "51750c3aeac1dbd26941f44f12c6064041242cb7",
     "scope": "BPF source, shared headers, ARM64 JIT, parser and network integrations; string/line comparisons, not a compiler or runtime test.",
     "files": [
       {
@@ -383,7 +383,8 @@
     },
     "configuration_evidence": "kernel-kconfig-audit.json",
     "previous_comparison_commit": "5300fb19f36c3b876089ac1f3c367cff4332c5b5",
-    "comparison_commit_note": "The WIPEONFORK follow-up changes mm/fork/UAPI mman and smaps only; the 54 compared BPF files are unchanged from 59588a8e31a9."
+    "comparison_commit_note": "The WIPEONFORK follow-up changes mm/fork/UAPI mman and smaps only; the 54 compared BPF files are unchanged from 59588a8e31a9.",
+    "subsequent_changes": "SELinux avtab.c-only fix 51750c3aeac1; all 54 compared BPF files unchanged by this follow-up."
   },
   "kconfig": {
     "scope": "Read-only Kconfiglib evaluation; external commands disabled. No compiler, make, .config, or generated C headers.",
@@ -498,6 +499,8 @@
     "opencode_followup_contracts": true,
     "a16_wipeonfork_contracts": true,
     "wipeonfork_review_current": true,
+    "selinux_policy_format_contracts": true,
+    "selinux_review_current": true,
     "bpf_feature_version_property": true,
     "signing_keys_loaded_by_platform_only": true
   },
@@ -529,7 +532,7 @@
   },
   "local_build_run": false,
   "ci_invoked": false,
-  "phone_modified": false,
+  "phone_modified": true,
   "signing_inheritance": {
     "scope": "Evaluate signing inheritance with Axion's actual product/node Make macros.\n\nNo build recipes, compiler, Soong, CI, key generation, or Android output tree.\nUnrelated product settings are omitted from this focused reproduction.\n",
     "results": {
@@ -551,7 +554,7 @@
   },
   "opencode_review": {
     "scope": "Source contracts, mechanical diffs and XML/permission review. No compiler, policy compiler, build, CI, ADB or runtime test.",
-    "kernel_commit": "630e76d696e709c551f5666bc2b20e90b53dcb11",
+    "kernel_commit": "51750c3aeac1dbd26941f44f12c6064041242cb7",
     "device_commit": "2acde968f0da2192a664481a625be60cc7e6816d",
     "checks": {
       "slab_rename_mechanical": true,
@@ -587,12 +590,11 @@
     "local_build_run": false
   },
   "new_diff_whitespace": {
-    "range": "59588a8e31a9bc8488cf30cedad153919fbd6f4e..630e76d696e709c551f5666bc2b20e90b53dcb11",
-    "result": "PASS",
-    "scope": "WIPEONFORK commits only; older upstream findings remain historical."
+    "scope": "SELinux fix 51750c3aeac1 against parent",
+    "git_diff_check": "PASS"
   },
   "wipeonfork_review": {
-    "kernel_commit": "630e76d696e709c551f5666bc2b20e90b53dcb11",
+    "kernel_commit": "51750c3aeac1dbd26941f44f12c6064041242cb7",
     "checks": {
       "uapi_wipe18_keep19": true,
       "wipe_bit_unique": true,
@@ -617,5 +619,53 @@
       "A16 recovery and updater startup on rebuilt kernel"
     ]
   },
-  "diagnostic_device_access": "Read-only ADB pull/shell for recovery log, pstore, uname/properties and updater hash. No flash, boot command, sideload, reboot or partition writes."
+  "diagnostic_device_access": {
+    "latest_scope": "Read-only ADB collection from restored old recovery; no additional device writes during SELinux investigation.",
+    "previous_image_test": "New recovery #4 was written and read back, then failed to start. User restored the old working recovery.",
+    "boot_partition_written_by_agent": false,
+    "rom_installed_by_agent": false
+  },
+  "selinux_compat_review": {
+    "kernel_commit": "51750c3aeac1dbd26941f44f12c6064041242cb7",
+    "upstream": "https://github.com/xiaomi-msm8998-devs/android_kernel_xiaomi_msm8998/commit/34114e4c2536965966b1d7dd558d4bdeb009d831",
+    "checks": {
+      "actual_failed_policy_hash_matches_analysis": true,
+      "prebuilt_libsepol_reads_policy": true,
+      "actual_policy_has_nlmsg_xperms": true,
+      "failed_kernel_reached_selinux": true,
+      "failed_kernel_triggered_legacy_m_heuristic": true,
+      "failed_kernel_reports_avtab_desync": true,
+      "fixed_avtab_matches_reference_exactly": true,
+      "legacy_format_heuristic_removed": true,
+      "reader_consumes_specified_and_driver": true,
+      "writer_retains_specified_and_driver": true,
+      "unknown_xperm_companion_present": true,
+      "services_unchanged_by_fix": true
+    },
+    "policy_analysis": {
+      "policy_sha256": "04523ca7a9f1ee82dcf43e00888bef466a1226573b9ead3bb379c12b9520636a",
+      "libsepol_package": "Debian libsepol2_3.11-1_amd64.deb",
+      "package_sha256": "4dcfd54ba3aac14c29be93c6007726c9139f000b52b964510bfb48a28834cbf7",
+      "policy_read_result": 0,
+      "disassembly_result": 0,
+      "nlmsg_xperm_rule_count": 100,
+      "nlmsg_xperm_examples": [
+        "allowxperm RIDL self:netlink_route_socket nlmsg { 0x16 0x1a 0x22 0x26 0x2a 0x2e 0x32 0x3a 0x3e 0x4a 0x4e 0x52 0x56 0x5a 0x5c 0x5e 0x60 0x66 0x6a 0x72 0x76 0x7a };",
+        "allowxperm adbd self:netlink_route_socket nlmsg { 0x16 0x1a 0x22 0x26 0x2a 0x2e 0x32 0x3a 0x3e 0x4a 0x4e 0x52 0x56 0x5a 0x5c 0x5e 0x60 0x66 0x6a 0x72 0x76 0x7a };",
+        "allowxperm adbd_tradeinmode self:netlink_route_socket nlmsg { 0x16 0x1a 0x22 0x26 0x2a 0x2e 0x32 0x3a 0x3e 0x4a 0x4e 0x52 0x56 0x5a 0x5c 0x5e 0x60 0x66 0x6a 0x72 0x76 0x7a };",
+        "allowxperm adpl self:netlink_route_socket nlmsg { 0x16 0x1a 0x22 0x26 0x2a 0x2e 0x32 0x3a 0x3e 0x4a 0x4e 0x52 0x56 0x5a 0x5c 0x5e 0x60 0x66 0x6a 0x72 0x76 0x7a };",
+        "allowxperm adservices self:netlink_route_socket nlmsg { 0x16 0x1a 0x22 0x26 0x2a 0x2e 0x32 0x3a 0x3e 0x4a 0x4e 0x52 0x56 0x5a 0x5c 0x5e 0x60 0x66 0x6a 0x72 0x76 0x7a };"
+      ],
+      "no_compilation_performed": true,
+      "device_modified": false
+    },
+    "scope": "Static source comparison and read-only disassembly of the failed recovery policy; no compilation or device writes.",
+    "limit": "This restores modern avtab decoding and retains the existing old-kernel unknown-xperm fallback. It does not implement new NLMSG xperm enforcement or establish successful loading by the rebuilt kernel.",
+    "runtime_required": [
+      "new recovery loads its SELinux policy",
+      "recovery starts with ADB",
+      "updater starts without SIGABRT",
+      "ROM boot and hardware tests"
+    ]
+  }
 }

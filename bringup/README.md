@@ -3,7 +3,8 @@
 Candidate: AxionOS Android 16, vanilla, ASUS Linux 4.4.302-CIP115.
 The user reports compilation succeeded before the current review. The review
 added allocator/BPF fixes and device integration; these new commits require a
-server rebuild. No local compilation, CI, ADB, flash or runtime testing was run.
+server rebuild. No local compilation or CI was run. Later recovery testing
+identified a policy-loader failure; see the current SELinux follow-up below.
 
 Read [opencode-review.md](opencode-review.md) for findings, commit mappings,
 README coverage, and limits. `opencode-review.json` records 21 passing source
@@ -14,8 +15,8 @@ It is a source snapshot, not a revision-locked manifest of the complete platform
 The device metadata is for the user's confirmed 4 GB / 13+5 MP rear / 8 MP front
 X00TD variant. The SoC is Snapdragon 636 despite the shared sdm660 platform name.
 
-`kernel-cherry-picks.jsonl` records 1,535 upstream-derived commits and one local
-correction (1,536 signed new kernel commits). Upstream author, author date and
+`kernel-cherry-picks.jsonl` records 1,536 upstream-derived commits and one local
+correction (1,537 signed new kernel commits). Upstream author, author date and
 message bodies were verified. Prefix/path adaptations and partial picks are
 explicitly recorded. Empty/already implemented changes are journaled separately.
 The ASUS CIP115 base, existing blobs and signing identity remain unchanged.
@@ -69,5 +70,18 @@ backported in kernel commits 73f0cf362c07 and 630e76d696e7.
 See [wipeonfork-fix.md](wipeonfork-fix.md) in the published bringup records.
 The old ZIP remains unchanged. Rebuild kernel/boot/recovery/ZIP on the server,
 then use the rebuilt recovery to install the rebuilt ZIP. No local build or
-device image write was performed. Kernel-only image builds are also possible
+device image write was performed during that diagnosis. Kernel-only image builds are also possible
 but require integrating both new images into the package/install procedure.
+
+## SELinux recovery failure follow-up
+
+The rebuilt kernel #4 passed arc4random but aborted loading the actual A16
+recovery policy. The Android M compatibility heuristic mistakes modern NLMSG
+xperms for M's older encoding, desynchronizing avtab records. Upstream
+34114e4c2536 was cherry-picked unchanged as 51750c3aeac1. The actual policy
+contains 100 NLMSG xperm rules; twelve static/evidence checks pass.
+See [selinux-recovery-fix.md](selinux-recovery-fix.md) and
+`selinux-compat-audit.json`. The user restored the working old recovery.
+Kernel #4 and the earlier repack remain failing artifacts; rebuild boot/recovery
+on the server, then validate the new images. SELinux remains enforced; this
+format fix does not add modern NLMSG xperm enforcement to the old kernel.
