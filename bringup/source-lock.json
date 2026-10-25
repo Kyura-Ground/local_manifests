@@ -40,7 +40,7 @@
       "path": "kernel/asus/sdm660",
       "repository": "https://github.com/Kyura-Ground/android_kernel_asus_sdm660",
       "branch": "axion-23.2-4.4",
-      "commit": "5300fb19f36c3b876089ac1f3c367cff4332c5b5",
+      "commit": "39062a7758fab196d0dddc508510aab57f429625",
       "a15_baseline": "613a72fe7e5c78881bdaffda8bcfaf46cff6531c"
     }
   ],

@@ -1,8 +1,8 @@
 {
   "scope": "Source-only candidate for the first server build. No ROM compilation, CI or device boot validation performed.",
   "kernel_provenance": {
-    "kernel_commit": "5300fb19f36c3b876089ac1f3c367cff4332c5b5",
-    "upstream_metadata_checked": 1526,
+    "kernel_commit": "39062a7758fab196d0dddc508510aab57f429625",
+    "upstream_metadata_checked": 1531,
     "metadata_failures": [],
     "title_adaptations": [
       {
@@ -21,10 +21,18 @@
         "adaptation": "Map BPF_STREAM_PARSER=y and explicit TLS disable to X00TD; omit unrelated SLUB line reordering from the Xiaomi defconfig."
       }
     ],
-    "local_signed_commits": 1526,
+    "local_signed_commits": 1531,
     "invalid_signatures": [],
     "commits_not_in_journal": [],
-    "no_compilation_performed": true
+    "no_compilation_performed": true,
+    "build_progress": {
+      "platform": "ServerHive",
+      "latest_observed_failure": "kernel/bpf/btf.c: implicit declaration of kvzalloc/kvmalloc",
+      "fix_commit": "39062a7758fab196d0dddc508510aab57f429625",
+      "fix_source": "a7c3e901a46ff54c016d040847eda598a9e3e653",
+      "rebuild_status": "pending; no Image.gz-dtb yet",
+      "local_build_run": false
+    }
   },
   "bpf_source_comparison": {
     "reference": "15e2687e40a47a7e6bb86dbf746a37c657b2092f",
@@ -360,7 +368,8 @@
       "arch/arm64/net/bpf_jit_comp.c": "Two additional blank lines only.",
       "kernel/bpf/core.c": "Retain baseline __GFP_HIGHMEM flags in vmalloc allocation. ARM64 has no HIGHMEM zone. Generic JIT helpers retain module allocator calls; X00TD evaluates MODULES=y, which selects the same reference allocator path. ARM64 supplies its own JIT allocator."
     },
-    "configuration_evidence": "kernel-kconfig-audit.json"
+    "configuration_evidence": "kernel-kconfig-audit.json",
+    "comparison_commit_note": "Comparison was taken at 5300fb19f36c. Commit 39062a7758fa changes only include/linux/mm.h, mm/util.c and fs/f2fs/f2fs.h; none of the 54 compared BPF files changed."
   },
   "kconfig": {
     "checks": {

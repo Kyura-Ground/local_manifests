@@ -8,6 +8,10 @@ backports and static source checks are complete; ROM compilation and device
 boot have not been validated. All referenced source branches must be available
 on `axion-23.2-4.4` before syncing.
 
+The kernel compile has reached object compilation on ServerHive; the current
+`btf.c` `kvmalloc`/`kvzalloc` failure is fixed by kernel commit `39062a7758fa`,
+pending a rebuild and `Image.gz-dtb`.
+
 ```bash
 repo init -u https://github.com/AxionAOSP/android.git -b lineage-23.2 --git-lfs
 git clone --depth=1 -b axion-23.2-4.4 https://github.com/Kyura-Ground/local_manifests.git .repo/local_manifests

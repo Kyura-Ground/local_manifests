@@ -9,11 +9,17 @@ It is a source snapshot, not a revision-locked manifest for every Android projec
 `device-upstream-references.json` records device/common adaptations and source URLs.
 
 `kernel-cherry-picks.jsonl` maps upstream commits to local commits and describes
-manual adaptations. The kernel contains 1,526 new, locally signed commits; author,
+manual adaptations. The kernel contains 1,531 new, locally signed commits; author,
 author date and upstream message bodies were verified. Defconfig device names
 were adapted in commit titles. Empty/already implemented changes are journaled
 without creating empty commits. The kernel remains based on the ASUS CIP115 tree;
 the Xiaomi device configuration and uname-spoof changes were not imported.
+
+The latest ServerHive kernel compile reached object compilation and stopped at
+`kernel/bpf/btf.c` on missing `kvmalloc`/`kvzalloc`. Commit `39062a7758fa`
+imports upstream `a7c3e901a46f`'s helpers into `include/linux/mm.h` and
+`mm/util.c`, and removes the duplicate `fs/f2fs/f2fs.h` definitions. A rebuild
+for this commit and `Image.gz-dtb` are still pending; no local build was run.
 
 Kernel reference:
 [xiaomi-msm8998-devs/android_kernel_xiaomi_msm8998](https://github.com/xiaomi-msm8998-devs/android_kernel_xiaomi_msm8998/tree/lineage-23.2),
