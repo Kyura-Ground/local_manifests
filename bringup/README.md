@@ -1,10 +1,12 @@
 # X00TD AxionOS A16 source references
 
 Candidate: AxionOS Android 16, vanilla, ASUS Linux 4.4.302-CIP115.
-The user reports compilation succeeded before the current review. The review
-added allocator/BPF fixes and device integration; these new commits require a
-server rebuild. No local compilation or CI was run. Later recovery testing
-identified a policy-loader failure; see the current SELinux follow-up below.
+Android initial boot is confirmed with user-supplied kernel #5 and the metadata
+hotfix: setup/home, boot_completed=1, registered RANGING permission and an empty
+post-boot crash logcat buffer. No local compilation or CI was run. The earlier
+allocator/BPF, integration and recovery failures are documented below, along
+with the current common-device fix 20c2f74b5b55. Hardware and repeat-boot tests
+remain pending.
 
 Read [opencode-review.md](opencode-review.md) for findings, commit mappings,
 README coverage, and limits. `opencode-review.json` records 21 passing source
@@ -85,3 +87,14 @@ See [selinux-recovery-fix.md](selinux-recovery-fix.md) and
 Kernel #4 and the earlier repack remain failing artifacts; rebuild boot/recovery
 on the server, then validate the new images. SELinux remains enforced; this
 format fix does not add modern NLMSG xperm enforcement to the old kernel.
+
+## Android initial boot confirmed
+
+Kernel #5 passed SELinux. The next system_server crash was RANGING permission
+lookup after aconfig failed without /metadata. LuK1337 d7b10b07e338 was picked
+as common device commit 20c2f74b5b55, adapting the two paths while retaining
+author/date/message/Change-Id and the same four added lines. The equivalent
+installed-image hotfix reached setup/home and ADB boot_completed=1.
+See [metadata-aconfig-fix.md](metadata-aconfig-fix.md) and
+`metadata-fix-audit.json`. Hardware, repeat boots and persistent metadata
+services still need validation; the 10 MiB tmpfs is volatile.

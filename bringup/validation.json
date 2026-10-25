@@ -1,5 +1,5 @@
 {
-  "scope": "Source candidate after pstore-confirmed A16 recovery SELinux failure. Kernel #4 passed arc4random then aborted in obsolete M avtab compatibility decoding. Read-only analysis confirms 100 modern NLMSG xperm rules. Fix 51750c3aeac1 requires a server kernel/boot/recovery rebuild and runtime validation. No local compilation or CI.",
+  "scope": "Kernel #5 plus installed-image faux metadata fix booted Android. RANGING is registered, metadata tmpfs exists and the captured crash logcat buffer is empty. New package verification is separate from a direct ZIP installation test. No local build or CI.",
   "kernel_provenance": {
     "kernel_commit": "51750c3aeac1dbd26941f44f12c6064041242cb7",
     "upstream_metadata_checked": 1536,
@@ -38,9 +38,9 @@
     "commits_not_in_journal": [],
     "no_compilation_performed": true,
     "build_progress": {
-      "last_observed": "User rebuilt kernel #4; pstore reaches SELinux then invalid avtab type/class / InitFatalReboot signal 6. Old working recovery restored by user.",
+      "last_observed": "User kernel #5 passed SELinux and network BPF loading; Android reached setup/home after common-device metadata hotfix. RANGING is registered and post-boot crash logcat is empty.",
       "fix_head": "51750c3aeac1dbd26941f44f12c6064041242cb7",
-      "rebuild_status": "pending server rebuild of boot/recovery with SELinux decoder fix",
+      "rebuild_status": "User rebuilt boot/recovery #5; metadata source fix was applied directly and packaged without local compilation.",
       "local_build_run": false
     }
   },
@@ -501,6 +501,8 @@
     "wipeonfork_review_current": true,
     "selinux_policy_format_contracts": true,
     "selinux_review_current": true,
+    "metadata_source_and_initial_boot_verified": true,
+    "metadata_review_current": true,
     "bpf_feature_version_property": true,
     "signing_keys_loaded_by_platform_only": true
   },
@@ -620,10 +622,10 @@
     ]
   },
   "diagnostic_device_access": {
-    "latest_scope": "Read-only ADB collection from restored old recovery; no additional device writes during SELinux investigation.",
-    "previous_image_test": "New recovery #4 was written and read back, then failed to start. User restored the old working recovery.",
-    "boot_partition_written_by_agent": false,
-    "rom_installed_by_agent": false
+    "metadata_hotfix": "Backed up original rc; created metadata mount point and added one mount line; verified readback and DAC/SELinux metadata; filesystems remounted read-only. One reboot requested.",
+    "post_boot": "Read-only shell/logcat/dumpsys captures. Protected metadata listing and dmesg denied to shell; successful boot is separately verified.",
+    "userdata_formatted": false,
+    "boot_recovery_partitions_written_for_metadata_fix": false
   },
   "selinux_compat_review": {
     "kernel_commit": "51750c3aeac1dbd26941f44f12c6064041242cb7",
@@ -667,5 +669,53 @@
       "updater starts without SIGABRT",
       "ROM boot and hardware tests"
     ]
+  },
+  "metadata_aconfig_fix": {
+    "common_commit": "20c2f74b5b55fe9d03d805190b7220aa27fa7d58",
+    "upstream": "https://github.com/Tomoms/android_device_essential_mata/commit/d7b10b07e338e0768fa5c52df27e0b253a018ac9",
+    "adaptation": "Map BoardConfig.mk to BoardConfigCommon.mk and init.mata.rc to init.target.rc; same four inserted lines. Original subject/author/date/body/Change-Id retained.",
+    "checks": {
+      "upstream_author_date_full_message_preserved": true,
+      "local_commit_signature_valid": true,
+      "only_mapped_reference_files_changed": true,
+      "metadata_mountpoint_generated_by_build": true,
+      "tmpfs_mount_follows_mount_all_in_fs_action": true,
+      "device_rc_exactly_matches_source": true,
+      "device_readback_verified": true,
+      "boot_completed_observed": true,
+      "a15_primary_checkout_preserved": true,
+      "RANGING_permission_registered_after_boot": true,
+      "metadata_tmpfs_observed_after_boot": true,
+      "no_crash_buffer_entries_after_boot": true
+    },
+    "common_new_signed_commits": 11,
+    "user_report": "Setup/home screen reached after live metadata hotfix.",
+    "live_boot_evidence": "sys.boot_completed=1; zygote=running; bootanim=stopped; uptime=47.83 seconds.",
+    "limit": "Initial boot confirmed; hardware and repeat-boot tests pending. Metadata is a 10 MiB tmpfs, so persistent flag overrides or metadata-backed services are not established by this test.",
+    "local_build_run": false,
+    "userdata_formatted": false,
+    "post_boot_verification": {
+      "boot_completed": true,
+      "zygote_running": true,
+      "bootanim_stopped": true,
+      "kernel": "#5, 4.4.302-CIP115",
+      "metadata_tmpfs_observed": true,
+      "RANGING_permission_registered": true,
+      "previous_system_server_fatal_matches": 0,
+      "crash_logcat_capture": "successful; buffer empty",
+      "hardware_and_repeat_reboot_tests": "pending"
+    }
+  },
+  "package_validation": {
+    "filename": "axion-2.9-NOESIS-20261025-UNOFFICIAL-VANILLA-X00TD-bootfix.zip",
+    "sha256": "42080259f55211b89bcf4e115bddb994dc9577fe05a423eaea7f84d84654b1ea",
+    "boot_recovery_unchanged_from_user_build_5": true,
+    "system_change": "metadata root directory only",
+    "vendor_change": "one tmpfs mount line in init.target.rc",
+    "filesystem_checks": "e2fsck and mutation confinement PASS",
+    "payload_roundtrip": "PASS both partitions",
+    "signature_crc_and_image_hashes": "PASS",
+    "equivalent_live_hotfix_boot_test": "PASS",
+    "this_exact_zip_installation_test": "not performed"
   }
 }

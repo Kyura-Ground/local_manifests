@@ -20,7 +20,7 @@
       "path": "device/asus/sdm660-common",
       "repository": "https://github.com/Kyura-Ground/android_device_asus_sdm660-common-4.4",
       "branch": "axion-23.2-4.4",
-      "commit": "513d4aabb9eff14f3d0d431d2efced6974527720",
+      "commit": "20c2f74b5b55fe9d03d805190b7220aa27fa7d58",
       "a15_baseline": "9bd9b0474f48cfb15712e0287ff64143830acc4f"
     },
     {
