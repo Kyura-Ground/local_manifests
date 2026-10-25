@@ -57,7 +57,9 @@ axion X00TD userdebug va
 m bootimage recoveryimage -j192
 ```
 
-The expected kernel head is `51750c3aeac1dbd26941f44f12c6064041242cb7`.
+The SELinux fix was introduced at `51750c3aeac1dbd26941f44f12c6064041242cb7`.
+Current source heads, including subsequent post-boot fixes, are recorded in
+`source-lock.json`.
 No clean/full ROM rebuild is required to incorporate this kernel-only change.
 Both images must use the corrected kernel. New images still require validation
 and integration into the existing signed package before installation.

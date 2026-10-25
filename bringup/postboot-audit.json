@@ -1,0 +1,98 @@
+{
+  "kernel_commit": "e572bc741676e488e16b3bc909f95fc246ec688d",
+  "common_commit": "e1f6c62c52a92b1bb1efe0248e0616c70195f01b",
+  "running_kernel": "4.4.302-CIP115 #5 Oct 25 18:16:47 UTC; does not include these new follow-ups",
+  "checks": {
+    "observed_close_range_436_enosys": true,
+    "child_exit_127_before_dnsmasq_exec": true,
+    "native_syscall_436": true,
+    "compat_syscall_436": true,
+    "native_and_compat_table_bounds": true,
+    "close_range_caller_matches_android16": true,
+    "netd_spawn_uses_cloexec_default": true,
+    "range_bounded_by_table_before_loop": true,
+    "cloexec_marks_bitmap_under_lock": true,
+    "unshare_uses_existing_4_4_helper": true,
+    "unknown_flags_and_reversed_ranges_rejected": true,
+    "cpuset_mount_flag_recognized": true,
+    "cpuset_implements_semantics": true,
+    "pinner_missing_library_removed": true,
+    "metadata_files_unchanged_since_boot_fix": true,
+    "existing_rpfilter_support_retained": true,
+    "kernel_source_clean": true,
+    "common_source_clean": true
+  },
+  "findings": [
+    {
+      "problem": "Hotspot tears down after DNS forwarder setup",
+      "evidence": "netd failed dnsmasq pipe, strace child pid6103 syscall436(3,UINT_MAX,4) returns ENOSYS then exit127 before execve",
+      "upstream": "https://github.com/sunplex07/android_kernel_sony_msm8998/commit/e052ad11f068d2d6f223921dd493258942d0ee8a",
+      "local_commit": "e572bc741676e488e16b3bc909f95fc246ec688d",
+      "scope": "Exact upstream 4.4 patch; ARM64+compat registration, bounded close/CLOEXEC/unshare; author/date/full message retained",
+      "status": "source fixed; server kernel rebuild and real hotspot test pending"
+    },
+    {
+      "problem": "cpuset cgroup mount fails on Android16",
+      "evidence": "libprocessgroup requests cpuset,noprefix,cpuset_v2_mode; old kernel lacks option and /dev/cpuset contains plain directories",
+      "upstream": [
+        "https://github.com/xiaomi-msm8998-devs/android_kernel_xiaomi_msm8998/commit/51ef2994480694c04e836e65a2fc9d88b6e56451",
+        "https://github.com/xiaomi-msm8998-devs/android_kernel_xiaomi_msm8998/commit/7063011891876d35bf898abf0a8b358123d25cee"
+      ],
+      "local_commits": [
+        "cf6ff7dd02896eff768678f8f7ebb516a8b675d6",
+        "3551e1ff17bafbc846e6f75f76da1c1a18b2110d"
+      ],
+      "status": "source fixed; server kernel rebuild and cpuset runtime validation pending"
+    },
+    {
+      "problem": "PinnerService opens removed libRScpp.so",
+      "upstream": "https://github.com/crdroidandroid/android_device_xiaomi_sdm660-common/commit/7c5b1a27f8058ca526ad8cd7c488c79bc73c43b7",
+      "local_commit": "e1f6c62c52a92b1bb1efe0248e0616c70195f01b",
+      "status": "source fixed; overlay rebuild pending"
+    }
+  ],
+  "wifi_distinction": {
+    "bad_boot": "ICNSS state0x180; no WLFW service0x45; FW_READY0; wlan interfaces absent. Same random failure previously seen on A15; unresolved.",
+    "cold_boot": "QMI server and firmware ready; wlan0/wlan1/p2p0 exist. First hotspot attempts create wlan2 and reach AP-ENABLED, then DNS forwarder failure tears down AP. Later ENOSPC virtual-interface failures are not sufficient evidence of the initiating fault.",
+    "no_interface_override_applied": true
+  },
+  "remaining": [
+    "Hotspot data/DNS and repeated enable/disable after rebuilt kernel",
+    "Random warm reboot WLFW firmware service absence",
+    "Tethering TC-BPF attachment EINVAL despite relevant config enabled; requires separate review",
+    "AxDragonite external module skipped when generated kernel config has no =m; module not installed",
+    "Memory cgroup absent, fs-verity ENOTTY and perfd GPU DAC errors remain under review"
+  ],
+  "device_actions": [
+    "User enabled rooted debugging; adb root used",
+    "Read-only logcat/dmesg/dumpsys and temporary bounded strace attachment to netd",
+    "Isolated ndc tether start/status/stop with no interfaces to reproduce spawn failure; service returned to stopped",
+    "User performed one full power-off/cold boot; no agent reboot during postboot audit"
+  ],
+  "local_compilation": false,
+  "ci_invoked": false,
+  "new_images_flashed": false,
+  "raw_logs_published": false,
+  "evidence_files": [
+    {
+      "path": "axion-postboot-audit-20261026/hotspot-after-coldboot/netd-close-range-strace.txt",
+      "sha256": "3d01b6fc434423119c0dc416984fb23e8d91aede1784afc523eff4ef6f9ad62d"
+    },
+    {
+      "path": "axion-postboot-audit-20261026/hotspot-after-coldboot/isolated-netd-spawn-test.txt",
+      "sha256": "ebc2e474740e2967723092cfa1492a7980eb3abeb295d18007a4816a96b9e74e"
+    },
+    {
+      "path": "axion-postboot-audit-20261026/hotspot-after-coldboot/logcat-all.txt",
+      "sha256": "49cb04661276344c7135cd693eda0e468a107a137a66ec8bff3c1fcaee64b420"
+    },
+    {
+      "path": "axion-postboot-audit-20261026/hotspot-after-coldboot/dmesg.txt",
+      "sha256": "98d3146b8af34dc12b031140cc8de77f6537c4c9c91ea6a3a942eebf43ea0d12"
+    },
+    {
+      "path": "axion-postboot-audit-20261026/hotspot-after-coldboot/netd.txt",
+      "sha256": "37ea8a72821b25eab6267207b4a2fb8d0f5cb033755901946b4a16b236659b72"
+    }
+  ]
+}

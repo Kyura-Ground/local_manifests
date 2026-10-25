@@ -1,5 +1,5 @@
 {
-  "kernel_commit": "51750c3aeac1dbd26941f44f12c6064041242cb7",
+  "kernel_commit": "e572bc741676e488e16b3bc909f95fc246ec688d",
   "upstream": "https://github.com/xiaomi-msm8998-devs/android_kernel_xiaomi_msm8998/commit/34114e4c2536965966b1d7dd558d4bdeb009d831",
   "checks": {
     "actual_failed_policy_hash_matches_analysis": true,

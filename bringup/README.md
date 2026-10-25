@@ -17,8 +17,8 @@ It is a source snapshot, not a revision-locked manifest of the complete platform
 The device metadata is for the user's confirmed 4 GB / 13+5 MP rear / 8 MP front
 X00TD variant. The SoC is Snapdragon 636 despite the shared sdm660 platform name.
 
-`kernel-cherry-picks.jsonl` records 1,536 upstream-derived commits and one local
-correction (1,537 signed new kernel commits). Upstream author, author date and
+`kernel-cherry-picks.jsonl` records 1,539 upstream-derived commits and one local
+correction (1,540 signed new kernel commits). Upstream author, author date and
 message bodies were verified. Prefix/path adaptations and partial picks are
 explicitly recorded. Empty/already implemented changes are journaled separately.
 The ASUS CIP115 base, existing blobs and signing identity remain unchanged.
@@ -98,3 +98,13 @@ installed-image hotfix reached setup/home and ADB boot_completed=1.
 See [metadata-aconfig-fix.md](metadata-aconfig-fix.md) and
 `metadata-fix-audit.json`. Hardware, repeat boots and persistent metadata
 services still need validation; the 10 MiB tmpfs is volatile.
+
+## Post-boot follow-ups, 2026-10-26
+
+Kernel head e572bc741676 includes the reviewed cpuset mode and close_range
+backports; common head e1f6c62c52a9 removes the missing libRScpp pin entry.
+These changes need a server rebuild. The running build #5 lacks them.
+Hotspot root cause is confirmed by strace: close_range returns ENOSYS and the
+netd child exits 127 before dnsmasq starts. Random warm-boot WLAN firmware
+absence remains a separate unresolved problem. Read
+[postboot-hotspot-fixes.md](postboot-hotspot-fixes.md) for evidence and limits.
