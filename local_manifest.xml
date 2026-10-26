@@ -3,8 +3,7 @@
     <remote name="Kyura" fetch="https://github.com/Kyura-Ground/" />
     <project path="device/asus/X00TD" name="android_device_asus_X00TD-4.4" revision="axion" remote="Kyura" clone-depth="1" />
     <project path="device/asus/sdm660-common" name="android_device_asus_sdm660-common-4.4" revision="axion" remote="Kyura" clone-depth="1" />
-    <project path="vendor/asus/X00TD" name="proprietary_vendor_asus_X00TD-4.4" revision="axion" remote="Kyura" clone-depth="1" />
-    <project path="vendor/asus/sdm660-common" name="proprietary_vendor_asus_sdm660-common-4.4" revision="axion" remote="Kyura" clone-depth="1" />
+    <project path="vendor/asus" name="proprietary_vendor_asus_sdm660-4.4" revision="axion" remote="Kyura" clone-depth="1" />
     <project path="kernel/asus/sdm660" name="android_kernel_asus_sdm660" revision="axion" remote="Kyura" clone-depth="1" clone-submodules="true" />
     <remove-project name="android_device_axion_common" />
     <project path="device/axion/common" name="android_device_axion_common" revision="axion" remote="Kyura" clone-depth="1" />
