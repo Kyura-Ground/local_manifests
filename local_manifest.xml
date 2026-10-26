@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
     <remote name="Kyura" fetch="https://github.com/Kyura-Ground/" />
+
+    <!-- SDM660 with the Linux 4.4 HAL stack still selects msm8998. -->
+    <project path="hardware/qcom-caf/msm8998/audio" name="LineageOS/android_hardware_qcom_audio" revision="lineage-23.2-caf-msm8998" remote="github" clone-depth="1" />
+    <project path="hardware/qcom-caf/msm8998/display" name="LineageOS/android_hardware_qcom_display" revision="lineage-23.2-caf-msm8998" remote="github" clone-depth="1" />
+    <project path="hardware/qcom-caf/msm8998/media" name="LineageOS/android_hardware_qcom_media" revision="lineage-23.2-caf-msm8998" remote="github" clone-depth="1" />
+    <extend-project name="LineageOS/android_hardware_qcom-caf_common" path="hardware/qcom-caf/common">
+        <linkfile src="os_pickup.bp" dest="hardware/qcom-caf/msm8998/Android.bp" />
+    </extend-project>
+
     <project path="device/asus/X00TD" name="android_device_asus_X00TD-4.4" revision="lineage-24.0" remote="Kyura" clone-depth="1" />
     <project path="device/asus/sdm660-common" name="android_device_asus_sdm660-common-4.4" revision="lineage-24.0" remote="Kyura" clone-depth="1" />
     <project path="vendor/asus" name="proprietary_vendor_asus_sdm660-4.4" revision="lineage-24.0" remote="Kyura" clone-depth="1" />
