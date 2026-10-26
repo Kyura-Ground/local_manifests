@@ -9,6 +9,8 @@
     <extend-project name="LineageOS/android_hardware_qcom-caf_common" path="hardware/qcom-caf/common">
         <linkfile src="os_pickup.bp" dest="hardware/qcom-caf/msm8998/Android.bp" />
     </extend-project>
+    <!-- The A17 power HAL requires the newer QSSI display AIDL stack. -->
+    <extend-project name="LineageOS/android_vendor_qcom_opensource_power" path="vendor/qcom/opensource/power" revision="lineage-23.2" />
 
     <project path="device/asus/X00TD" name="android_device_asus_X00TD-4.4" revision="lineage-24.0" remote="Kyura" clone-depth="1" />
     <project path="device/asus/sdm660-common" name="android_device_asus_sdm660-common-4.4" revision="lineage-24.0" remote="Kyura" clone-depth="1" />
