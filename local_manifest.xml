@@ -5,7 +5,5 @@
     <project path="device/asus/sdm660-common" name="android_device_asus_sdm660-common-4.4" revision="lineage-23.2" remote="Kyura" clone-depth="1" />
     <project path="vendor/asus" name="proprietary_vendor_asus_sdm660-4.4" revision="lineage-23.2" remote="Kyura" clone-depth="1" />
     <project path="kernel/asus/sdm660" name="android_kernel_asus_sdm660-4.4" revision="lineage-23.2" remote="Kyura" clone-depth="1" clone-submodules="true" />
-    <project path="vendor/lineage-priv/keys" name="public-keys" remote="Kyura" revision="lineage-24.0" clone-depth="1">
-        <linkfile src="keys.mk" dest="vendor/evolution-priv/keys/keys.mk" />
-    </project>
+    <project path="vendor/evolution-priv/keys" name="public-keys" remote="Kyura" revision="lineage-24.0" clone-depth="1" />
 </manifest>
