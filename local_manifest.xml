@@ -12,10 +12,6 @@
     <!-- The A17 power HAL requires the newer QSSI display AIDL stack. -->
     <extend-project name="LineageOS/android_vendor_qcom_opensource_power" path="vendor/qcom/opensource/power" revision="lineage-23.2" />
 
-    <!-- Keep file-based encryption working on devices without /metadata. -->
-    <remove-project name="LineageOS/android_system_vold" />
-    <project path="system/vold" name="android_system_vold" revision="lineage-24.0" remote="Kyura" clone-depth="1" />
-
     <project path="device/asus/X00TD" name="android_device_asus_X00TD-4.4" revision="lineage-24.0" remote="Kyura" clone-depth="1" />
     <project path="device/asus/sdm660-common" name="android_device_asus_sdm660-common-4.4" revision="lineage-24.0" remote="Kyura" clone-depth="1" />
     <project path="vendor/asus" name="proprietary_vendor_asus_sdm660-4.4" revision="lineage-24.0" remote="Kyura" clone-depth="1" />
