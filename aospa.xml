@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  AOSPA topaz (Android 13) - ASUS ZenFone Max Pro M1 (X00TD)
+  Kernel: CLO 4.19.157 (LA.UM.11.2.1.r1-04500-sdm660.0)
+  HALs:   CLO A13 sdm660 (LA.UM.11.2.1.c26-08200-sdm660.0)
+-->
+<manifest>
+
+  <remote name="kyura" fetch="https://github.com/Kyura-Ground" />
+
+  <!-- Device trees -->
+  <project path="device/asus/X00TD"
+           name="android_device_asus_X00TD-4.19-CLO"
+           remote="kyura" revision="topaz" />
+  <project path="device/asus/sdm660-common"
+           name="android_device_asus_sdm660-common-4.19-CLO"
+           remote="kyura" revision="topaz" />
+
+  <!-- Kernel -->
+  <project path="kernel/asus/sdm660"
+           name="android_kernel_asus_sdm660-4.19-CLO"
+           remote="kyura" revision="topaz" />
+
+  <!-- Vendor blobs (X00TD + X01BD + sdm660-common) -->
+  <project path="vendor/asus"
+           name="proprietary_vendor_asus-4.19-CLO"
+           remote="kyura" revision="topaz" />
+
+  <!-- CLO A13 sdm660 HALs -->
+  <project path="hardware/qcom/display"
+           name="platform/hardware/qcom/display"
+           remote="clo-la" revision="LA.UM.11.2.1.c26-08200-sdm660.0" />
+  <project path="vendor/qcom/opensource/audio-hal/primary-hal"
+           name="platform/hardware/qcom/audio"
+           remote="clo-la" revision="LA.UM.11.2.1.c26-08200-sdm660.0" />
+
+  <remove-project name="platform/hardware/qcom/media" />
+  <project path="hardware/qcom/media"
+           name="platform/hardware/qcom/media"
+           remote="clo-la" revision="LA.UM.11.2.1.c26-08200-sdm660.0" />
+
+  <remove-project name="platform/hardware/qcom/gps" />
+  <project path="hardware/qcom/gps"
+           name="platform/hardware/qcom/gps"
+           remote="clo-la" revision="LA.UM.11.2.1.c26-08200-sdm660.0" />
+
+  <remove-project name="platform/hardware/qcom/wlan" />
+  <project path="hardware/qcom/wlan"
+           name="platform/hardware/qcom/wlan"
+           remote="clo-la" revision="LA.UM.11.2.1.c26-08200-sdm660.0" />
+
+</manifest>
