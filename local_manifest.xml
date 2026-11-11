@@ -2,20 +2,72 @@
 
 <manifest>
     <remote name="Kyura" fetch="https://github.com/Kyura-Ground" />
-    <remote name="ikwfahmi" fetch="https://github.com/ikwfahmi" />
-
+    <remote name="lineage-a17" fetch="https://github.com" revision="lineage-24.0" />
     <remove-project path="device/asus/X00TD" optional="true" />
     <remove-project path="device/asus/sdm660-common" optional="true" />
-    <remove-project path="vendor/asus" optional="true" />
-    <remove-project path="kernel/asus/sdm660" optional="true" />
+    <remove-project path="device/lineage/sepolicy" optional="true" />
+    <remove-project path="device/qcom/sepolicy-legacy-um" optional="true" />
+    <remove-project path="external/tinyxml" optional="true" />
+    <remove-project path="hardware/google/interfaces" optional="true" />
+    <remove-project path="hardware/google/pixel" optional="true" />
+    <remove-project path="hardware/lineage/interfaces" optional="true" />
+    <remove-project path="hardware/qcom-caf/bootctrl" optional="true" />
+    <remove-project path="hardware/qcom-caf/common" optional="true" />
     <remove-project path="hardware/qcom-caf/sdm660/audio" optional="true" />
+    <remove-project path="hardware/qcom-caf/sdm660/display" optional="true" />
+    <remove-project path="hardware/qcom-caf/sdm660/media" optional="true" />
+    <remove-project path="hardware/qcom-caf/thermal-legacy-um" optional="true" />
+    <remove-project path="hardware/qcom-caf/wlan" optional="true" />
+    <remove-project path="hardware/qcom/bootctrl" optional="true" />
+    <remove-project path="hardware/qcom/gps" optional="true" />
+    <remove-project path="hardware/qcom/media" optional="true" />
+    <remove-project path="hardware/qcom/wlan" optional="true" />
+    <remove-project path="kernel/asus/sdm660" optional="true" />
+    <remove-project path="vendor/asus" optional="true" />
+    <remove-project path="vendor/lineage-priv/keys" optional="true" />
+    <remove-project path="vendor/qcom/opensource/audio-hal/st-hal" optional="true" />
+    <remove-project path="vendor/qcom/opensource/commonsys-intf/display" optional="true" />
+    <remove-project path="vendor/qcom/opensource/commonsys/display" optional="true" />
+    <remove-project path="vendor/qcom/opensource/data-ipa-cfg-mgr" optional="true" />
+    <remove-project path="vendor/qcom/opensource/data-ipa-cfg-mgr-legacy" optional="true" />
+    <remove-project path="vendor/qcom/opensource/data-ipa-cfg-mgr-legacy-um" optional="true" />
+    <remove-project path="vendor/qcom/opensource/dataservices" optional="true" />
     <remove-project path="vendor/qcom/opensource/display" optional="true" />
-
-    <project path="device/asus/X00TD" name="android_device_asus_X00TD-4.19" remote="Kyura" revision="Infinity" clone-depth="1" />
-    <project path="device/asus/sdm660-common" name="android_device_asus_sdm660-common-4.19" remote="Kyura" revision="Infinity" clone-depth="1" />
-    <project path="vendor/asus" name="proprietary_vendor_asus-4.19" remote="Kyura" revision="Infinity" clone-depth="1" />
-    <project path="kernel/asus/sdm660" name="android_kernel_asus_sdm660-4.19" remote="Kyura" revision="lineage-24.0" clone-depth="1" />
+    <remove-project path="vendor/qcom/opensource/healthd-ext" optional="true" />
+    <remove-project path="vendor/qcom/opensource/interfaces" optional="true" />
+    <remove-project path="vendor/qcom/opensource/usb" optional="true" />
+    <remove-project path="vendor/qcom/opensource/vibrator" optional="true" />
+    <project path="device/asus/X00TD" name="android_device_asus_X00TD-4.19" remote="Kyura" revision="AOSPA" clone-depth="1">
+        <linkfile src="aospa/beans.xml" dest="vendor/aospa/products/X00TD/beans.xml" />
+    </project>
+    <project path="device/asus/sdm660-common" name="android_device_asus_sdm660-common-4.19" remote="Kyura" revision="AOSPA" clone-depth="1" />
+    <project path="device/lineage/sepolicy" name="LineageOS/android_device_lineage_sepolicy" remote="lineage-a17" clone-depth="1" />
+    <project path="device/qcom/sepolicy-legacy-um" name="LineageOS/android_device_qcom_sepolicy" revision="lineage-24.0-legacy-um" remote="lineage-a17" clone-depth="1" />
+    <project path="external/tinyxml" name="platform/external/tinyxml" revision="refs/tags/android-11.0.0_r46" remote="aosp" clone-depth="1" />
+    <project path="hardware/google/interfaces" name="LineageOS/android_hardware_google_interfaces" remote="lineage-a17" clone-depth="1" />
+    <project path="hardware/google/pixel" name="LineageOS/android_hardware_google_pixel" remote="lineage-a17" clone-depth="1" />
+    <project path="hardware/lineage/interfaces" name="LineageOS/android_hardware_lineage_interfaces" remote="lineage-a17" clone-depth="1" />
+    <project path="hardware/qcom-caf/bootctrl" name="LineageOS/android_hardware_qcom_bootctrl" revision="lineage-24.0-caf" remote="lineage-a17" clone-depth="1" />
+    <project path="hardware/qcom-caf/common" name="LineageOS/android_hardware_qcom-caf_common" remote="lineage-a17" clone-depth="1">
+        <linkfile src="os_pickup_aosp.mk" dest="hardware/qcom/Android.mk" />
+        <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sdm660/Android.bp" />
+    </project>
     <project path="hardware/qcom-caf/sdm660/audio" name="android_hardware_qcom_audio" remote="Kyura" revision="lineage-24.0-caf-sdm660" clone-depth="1" />
-    <project path="vendor/qcom/opensource/display" name="android_vendor_qcom_opensource_display" remote="Kyura" revision="lineage-24.0" clone-depth="1" />
+    <project path="hardware/qcom-caf/sdm660/display" name="LineageOS/android_hardware_qcom_display" revision="lineage-24.0-caf-sdm660" remote="lineage-a17" clone-depth="1" />
+    <project path="hardware/qcom-caf/sdm660/media" name="LineageOS/android_hardware_qcom_media" revision="lineage-24.0-caf-sdm660" remote="lineage-a17" clone-depth="1" />
+    <project path="hardware/qcom-caf/thermal-legacy-um" name="LineageOS/android_hardware_qcom_thermal" revision="lineage-24.0-legacy-um" remote="lineage-a17" clone-depth="1" />
+    <project path="hardware/qcom-caf/wlan" name="LineageOS/android_hardware_qcom_wlan" revision="lineage-24.0-caf" remote="lineage-a17" clone-depth="1" />
+    <project path="kernel/asus/sdm660" name="android_kernel_asus_sdm660-4.19" remote="Kyura" revision="AOSPA" clone-depth="1" />
+    <project path="vendor/asus" name="proprietary_vendor_asus-4.19" remote="Kyura" revision="Infinity" clone-depth="1" />
     <project path="vendor/lineage-priv/keys" name="public-keys" remote="Kyura" revision="lineage-24.0" clone-depth="1" />
+    <project path="vendor/qcom/opensource/audio-hal/st-hal" name="LineageOS/android_vendor_qcom_opensource_audio-hal_st-hal" remote="lineage-a17" clone-depth="1" />
+    <project path="vendor/qcom/opensource/commonsys-intf/display" name="LineageOS/android_vendor_qcom_opensource_display-commonsys-intf" remote="lineage-a17" clone-depth="1" />
+    <project path="vendor/qcom/opensource/commonsys/display" name="LineageOS/android_vendor_qcom_opensource_display-commonsys" remote="lineage-a17" clone-depth="1" />
+    <project path="vendor/qcom/opensource/data-ipa-cfg-mgr-legacy-um" name="LineageOS/android_vendor_qcom_opensource_data-ipa-cfg-mgr" revision="lineage-24.0-legacy-um" remote="lineage-a17" clone-depth="1" />
+    <project path="vendor/qcom/opensource/dataservices" name="LineageOS/android_vendor_qcom_opensource_dataservices" remote="lineage-a17" clone-depth="1" />
+    <project path="vendor/qcom/opensource/display" name="android_vendor_qcom_opensource_display" remote="Kyura" revision="lineage-24.0" clone-depth="1" />
+    <project path="vendor/qcom/opensource/healthd-ext" name="LineageOS/android_vendor_qcom_opensource_healthd-ext" remote="lineage-a17" clone-depth="1" />
+    <project path="vendor/qcom/opensource/interfaces" name="LineageOS/android_vendor_qcom_opensource_interfaces" remote="lineage-a17" clone-depth="1" />
+    <project path="vendor/qcom/opensource/usb" name="LineageOS/android_vendor_qcom_opensource_usb" remote="lineage-a17" clone-depth="1" />
+    <project path="vendor/qcom/opensource/vibrator" name="LineageOS/android_vendor_qcom_opensource_vibrator" remote="lineage-a17" clone-depth="1" />
 </manifest>
