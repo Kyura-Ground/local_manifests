@@ -1,14 +1,28 @@
-# Getting Started
-To initialize your device trees setup, use command:
+# Experimental X00TD AOSPA/CLO setup
+
+Use a separate build-server checkout for the non-NFC X00TD with kernel
+4.19. The original `AOSPA` and `Infinity` branches are independent.
 
 ```bash
-git clone -b Infinity-16 https://github.com/ikwfahmi/local_manifests.git .repo/local_manifests
+repo init -u https://github.com/AOSPA/manifest -b calcite
+git clone -b AOSPA-CLO https://github.com/Kyura-Ground/local_manifests .repo/local_manifests
+repo sync -c --no-tags -j4
+./rom-build.sh X00TD
 ```
 
-Then sync with ROM source or sync standalone with this command:
-```bash
-repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j$(nproc --all)
-```
+The manifest uses native AOSPA/CLO Qualcomm dependencies. Its legacy HALs
+and vendor policy are older official AOSPA branches adapted by the device
+configuration. The local audio branch retains the X00TD speaker fixes.
+
+Existing ASUS blobs, imported legacy Bluetooth interfaces, the basic USB
+service and the dummy perf client remain compatibility components. This
+does not remove the original LineageOS ancestry of the device and kernel
+trees. The signing-key repository path and revision retain their existing
+names to preserve signing identity.
+
+Full Android 17 builds, policy compilation, partition sizing and hardware
+boot tests are still required. Do not treat host configuration checks as
+evidence that an image is ready to flash.
 
 **Credit:**
 - [Crave](https://foss.crave.io)
