@@ -16,18 +16,18 @@
     <remove-project path="vendor/qcom/opensource/audio-hal/primary-hal" optional="true" />
     <remove-project path="vendor/qcom/opensource/audio-hal/st-hal" optional="true" />
 
-    <project path="device/asus/X00TD" name="android_device_asus_X00TD-4.19" remote="Kyura" revision="AOSPA-CLO" clone-depth="1">
+    <project path="device/asus/X00TD" name="android_device_asus_X00TD-4.19" remote="Kyura" revision="AOSPA" clone-depth="1">
         <linkfile src="aospa/beans.xml" dest="vendor/aospa/products/X00TD/beans.xml" />
     </project>
-    <project path="device/asus/sdm660-common" name="android_device_asus_sdm660-common-4.19" remote="Kyura" revision="AOSPA-CLO" clone-depth="1" />
+    <project path="device/asus/sdm660-common" name="android_device_asus_sdm660-common-4.19" remote="Kyura" revision="AOSPA" clone-depth="1" />
     <project path="device/qcom/sepolicy" name="AOSPA/android_device_qcom_sepolicy" remote="aospa" revision="sapphire-660-4.19" clone-depth="1" />
     <project path="external/tinyxml" name="platform/external/tinyxml" remote="aosp" revision="refs/tags/android-11.0.0_r46" clone-depth="1" />
     <project path="hardware/google/pixel" name="platform/hardware/google/pixel" remote="aosp" revision="b38821afd45b12490078d82b1abf7878cfe147fd" clone-depth="1" />
     <project path="hardware/qcom/display" name="AOSPA/android_hardware_qcom_display" remote="aospa" revision="vauxite-89xx-4.19" clone-depth="1" />
     <project path="hardware/qcom/media" name="AOSPA/android_hardware_qcom_media" remote="aospa" revision="vauxite-89xx-4.19" clone-depth="1" />
-    <project path="kernel/asus/sdm660" name="android_kernel_asus_sdm660-4.19" remote="Kyura" revision="AOSPA-CLO" clone-depth="1" />
-    <project path="vendor/asus" name="proprietary_vendor_asus-4.19" remote="Kyura" revision="AOSPA-CLO" clone-depth="1" />
+    <project path="kernel/asus/sdm660" name="android_kernel_asus_sdm660-4.19" remote="Kyura" revision="AOSPA" clone-depth="1" />
+    <project path="vendor/asus" name="proprietary_vendor_asus-4.19" remote="Kyura" revision="AOSPA" clone-depth="1" />
     <project path="vendor/lineage-priv/keys" name="public-keys" remote="Kyura" revision="lineage-24.0" clone-depth="1" />
-    <project path="vendor/qcom/opensource/audio-hal/primary-hal" name="android_hardware_qcom_audio" remote="Kyura" revision="AOSPA-CLO" clone-depth="1" />
+    <project path="vendor/qcom/opensource/audio-hal/primary-hal" name="android_hardware_qcom_audio" remote="Kyura" revision="AOSPA" clone-depth="1" />
     <project path="vendor/qcom/opensource/audio-hal/st-hal" name="AOSPA/android_vendor_qcom_opensource_audio-hal_st-hal" remote="aospa" revision="vauxite-855" clone-depth="1" />
 </manifest>

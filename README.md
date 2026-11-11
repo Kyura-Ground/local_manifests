@@ -1,11 +1,12 @@
 # Experimental X00TD AOSPA/CLO setup
 
 Use a separate build-server checkout for the non-NFC X00TD with kernel
-4.19. The original `AOSPA` and `Infinity` branches are independent.
+4.19. Use `AOSPA` for every matching device dependency; the experimental
+CLO integration is maintained on this same branch.
 
 ```bash
 repo init -u https://github.com/AOSPA/manifest -b calcite
-git clone -b AOSPA-CLO https://github.com/Kyura-Ground/local_manifests .repo/local_manifests
+git clone -b AOSPA https://github.com/Kyura-Ground/local_manifests .repo/local_manifests
 repo sync -c --no-tags -j4
 ./rom-build.sh X00TD
 ```
