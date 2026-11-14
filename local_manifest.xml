@@ -18,7 +18,7 @@
                  kernel/asus/sdm660-5.4 vendor/asus vendor/lineage-priv/keys
 -->
 <manifest>
-    <remote name="Kyura" fetch="https://github.com/Kyura-Ground" />
+    <remote name="Kyura" fetch="ssh://git@github.com/Kyura-Ground" />
 
     <project path="device/asus/X00TD" name="android_device_asus_X00TD-5.4"
              remote="Kyura" revision="lineage-24.0" clone-depth="1" />
