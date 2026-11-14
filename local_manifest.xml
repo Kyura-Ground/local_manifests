@@ -1,20 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  X00TD / sdm660 on kernel 5.4 - LineageOS lineage-24.0 (Android 17).
+
+  sdm660 CAF HALs (audio, display, media, wlan) and hardware/qcom-caf/common
+  are already tracked by the official LineageOS 24.0 manifest snippets, so no
+  override is needed here.
+
+  Repositories synced here:
+    - device/asus/X00TD       (5.4 device tree, branch lineage-24.0)
+    - device/asus/sdm660-common
+    - kernel/asus/sdm660-5.4   (5.4 kernel, branch lineage-22.1)
+    - vendor/asus             (proprietary blobs, branch lineage-24.0)
+    - vendor/lineage-priv/keys (signing keys, branch lineage-24.0)
+
+  Quick sync:
+    repo sync -c -f device/asus/X00TD device/asus/sdm660-common \
+                 kernel/asus/sdm660-5.4 vendor/asus vendor/lineage-priv/keys
+-->
 <manifest>
-    <remote name="Kyura" fetch="https://github.com/Kyura-Ground/" />
+    <remote name="Kyura" fetch="https://github.com/Kyura-Ground" />
 
-    <!-- SDM660 with the Linux 4.4 HAL stack still selects msm8998. -->
-    <project path="hardware/qcom-caf/msm8998/audio" name="LineageOS/android_hardware_qcom_audio" revision="lineage-23.2-caf-msm8998" remote="github" clone-depth="1" />
-    <project path="hardware/qcom-caf/msm8998/display" name="LineageOS/android_hardware_qcom_display" revision="lineage-23.2-caf-msm8998" remote="github" clone-depth="1" />
-    <project path="hardware/qcom-caf/msm8998/media" name="LineageOS/android_hardware_qcom_media" revision="lineage-23.2-caf-msm8998" remote="github" clone-depth="1" />
-    <extend-project name="LineageOS/android_hardware_qcom-caf_common" path="hardware/qcom-caf/common">
-        <linkfile src="os_pickup.bp" dest="hardware/qcom-caf/msm8998/Android.bp" />
-    </extend-project>
-    <!-- The A17 power HAL requires the newer QSSI display AIDL stack. -->
-    <extend-project name="LineageOS/android_vendor_qcom_opensource_power" path="vendor/qcom/opensource/power" revision="lineage-23.2" />
-
-    <project path="device/asus/X00TD" name="android_device_asus_X00TD-4.4" revision="lineage-24.0" remote="Kyura" clone-depth="1" />
-    <project path="device/asus/sdm660-common" name="android_device_asus_sdm660-common-4.4" revision="lineage-24.0" remote="Kyura" clone-depth="1" />
-    <project path="vendor/asus" name="proprietary_vendor_asus_sdm660-4.4" revision="lineage-24.0" remote="Kyura" clone-depth="1" />
-    <project path="kernel/asus/sdm660" name="android_kernel_asus_sdm660-4.4" revision="lineage-24.0" remote="Kyura" clone-depth="1" clone-submodules="true" />
-    <project path="vendor/lineage-priv/keys" name="public-keys" remote="Kyura" revision="lineage-24.0" clone-depth="1" />
+    <project path="device/asus/X00TD" name="android_device_asus_X00TD-5.4"
+             remote="Kyura" revision="lineage-24.0" clone-depth="1" />
+    <project path="device/asus/sdm660-common" name="android_device_asus_sdm660-common-5.4"
+             remote="Kyura" revision="lineage-24.0" clone-depth="1" />
+    <project path="kernel/asus/sdm660-5.4" name="android_kernel_asus_sdm660-5.4"
+             remote="Kyura" revision="lineage-22.1" clone-depth="1" />
+    <project path="vendor/asus" name="proprietary_vendor_asus-5.4"
+             remote="Kyura" revision="lineage-24.0" clone-depth="1" />
+    <project path="vendor/lineage-priv/keys" name="public-keys"
+             remote="Kyura" revision="lineage-24.0" clone-depth="1" />
 </manifest>
