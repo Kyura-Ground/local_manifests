@@ -9,13 +9,13 @@
   Repositories synced here:
     - device/asus/X00TD       (5.4 device tree, branch lineage-24.0)
     - device/asus/sdm660-common
-    - kernel/asus/sdm660-5.4   (5.4 kernel, branch lineage-24.0)
+    - kernel/asus/sdm660       (5.4 kernel, branch lineage-24.0)
     - vendor/asus             (proprietary blobs, branch lineage-24.0)
-    - vendor/lineage-priv/keys (signing keys, branch lineage-24.0)
+    - vendor/lineage-priv/keys (signing configuration, branch lineage-24.0)
 
   Quick sync:
     repo sync -c -f device/asus/X00TD device/asus/sdm660-common \
-                 kernel/asus/sdm660-5.4 vendor/asus vendor/lineage-priv/keys
+                 kernel/asus/sdm660 vendor/asus vendor/lineage-priv/keys
 -->
 <manifest>
     <remote name="Kyura" fetch="ssh://git@github.com/Kyura-Ground" />
@@ -24,7 +24,7 @@
              remote="Kyura" revision="lineage-24.0" clone-depth="1" />
     <project path="device/asus/sdm660-common" name="android_device_asus_sdm660-common-5.4"
              remote="Kyura" revision="lineage-24.0" clone-depth="1" />
-    <project path="kernel/asus/sdm660-5.4" name="android_kernel_asus_sdm660-5.4"
+    <project path="kernel/asus/sdm660" name="android_kernel_asus_sdm660-5.4"
              remote="Kyura" revision="lineage-24.0" clone-depth="1" />
     <project path="vendor/asus" name="proprietary_vendor_asus-5.4"
              remote="Kyura" revision="lineage-24.0" clone-depth="1" />
